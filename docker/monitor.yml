@@ -1,0 +1,45 @@
+version: "3"
+
+services:
+
+  # Checks for new versions of images of running containers
+  diun:
+    image: crazymax/diun:latest
+    container_name: diun
+    restart: always
+    command: serve
+    network_mode: bridge
+    hostname: raspberry
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "diun:/data"
+    environment:
+      - "LOG_LEVEL=info"
+      - "LOG_JSON=false"
+      - "DIUN_WATCH_WORKERS=2"
+      - "DIUN_WATCH_SCHEDULE=0 */6 * * *"
+      - "DIUN_WATCH_JITTER=30s"
+      - "DIUN_PROVIDERS_DOCKER=true"
+      - "DIUN_PROVIDERS_DOCKER_WATCHBYDEFAULT=true"
+      - "DIUN_NOTIF_PUSHOVER_TOKEN=${DIUN_NOTIF_PUSHOVER_TOKEN}"
+      - "DIUN_NOTIF_PUSHOVER_RECIPIENT=${DIUN_NOTIF_PUSHOVER_RECIPIENT}"
+      - "TZ=Europe/Zurich"
+
+  # Checks for the health of running containers and sends notifications
+  monocker:
+    image: petersem/monocker
+    container_name: monocker
+    restart: always
+    network_mode: bridge
+    hostname: raspberry
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      - "SERVER_LABEL=raspberry"
+      - "MESSAGE_PLATFORM=${MESSAGE_PLATFORM}"
+      - "PERIOD=300"
+      - "TZ=Europe/Zurich"
+
+# Create volumes by visiting the "Volumes" tab on the left
+volumes:
+  diun:

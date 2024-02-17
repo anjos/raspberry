@@ -1,0 +1,70 @@
+version: "3"
+
+services:
+
+  # Plex Media Server (and web client)
+  plex:
+    image: lscr.io/linuxserver/plex:latest
+    container_name: plex
+    restart: always
+    hostname: raspberry
+    network_mode: bridge
+    ports:
+      - 32400:32400/tcp
+      - 8324:8324/tcp
+      - 32469:32469/tcp
+      - 1900:1900/udp
+      - 32410:32410/udp
+      - 32412:32412/udp
+      - 32413:32413/udp
+      - 32414:32414/udp
+    healthcheck:
+      test: curl --fail localhost:32400/web || exit 1
+      interval: 60s
+      retries: 5
+      start_period: 30s
+      timeout: 2s
+    volumes:
+      - "plex:/config"
+      - "/media:/data"
+      - "/media/tmp:/transcode"
+    environment:
+      - "VERSION=docker"
+      - "PLEX_CLAIM=${PLEX_CLAIM}"
+      - "TZ=Europe/Zurich"
+      - "PUID=1000"
+      - "PGID=1000"
+    devices:
+      - "/dev/dri:/dev/dri"
+
+  # Bittorrent client
+  deluge:
+    image: lscr.io/linuxserver/deluge:latest
+    container_name: deluge
+    restart: always
+    hostname: raspberry
+    network_mode: bridge
+    ports:
+      - 8112:8112
+      - 6881:6881
+      - 6881:6881/udp
+      - 58846:58846  #optional
+    healthcheck:
+      test: curl --fail localhost:8112 || exit 1
+      interval: 60s
+      retries: 5
+      start_period: 30s
+      timeout: 2s
+    volumes:
+      - "deluge:/config"
+      - "/media/downloads:/downloads"
+    environment:
+      - "DELUGE_LOGLEVEL=error"
+      - "TZ=Europe/Zurich"
+      - "PUID=1000"
+      - "PGID=1000"
+
+# Create volumes by visiting the "Volumes" tab on the left
+volumes:
+  plex:
+  deluge:
