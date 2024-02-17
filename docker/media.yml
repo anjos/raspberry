@@ -7,7 +7,7 @@ services:
     image: lscr.io/linuxserver/plex:latest
     container_name: plex
     restart: unless-stopped
-    hostname: raspberry
+    hostname: plex
     network_mode: bridge
     ports:
       - 32400:32400/tcp
@@ -42,7 +42,7 @@ services:
     image: lscr.io/linuxserver/deluge:latest
     container_name: deluge
     restart: unless-stopped
-    hostname: raspberry
+    hostname: deluge
     network_mode: bridge
     ports:
       - 8112:8112
@@ -69,7 +69,7 @@ services:
     image: lscr.io/linuxserver/radarr:latest
     container_name: radarr
     restart: unless-stopped
-    hostname: raspberry
+    hostname: radarr
     network_mode: bridge
     ports:
       - 7878:7878
