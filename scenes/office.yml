@@ -1,0 +1,57 @@
+Office:
+    "Off":
+        Office Ceiling light 1:
+          state: "OFF"
+        Office Ceiling light 2:
+          state: "OFF"
+        Office Ceiling light 3:
+          state: "OFF"
+        Office Window light bar:
+          state: "OFF"
+        Office Reading light plug:
+          state: "OFF"
+    "On":
+        Office Ceiling light 1:
+          state: "ON"
+          brightness: 254
+          color_temp: cool
+        Office Ceiling light 2:
+          state: "ON"
+          brightness: 254
+          color_temp: cool
+        Office Ceiling light 3:
+          state: "ON"
+          brightness: 254
+          color_temp: cool
+        Office Window light bar:
+          state: "ON"
+          brightness: 254
+          color_temp: cool
+        Office Reading light plug:
+          state: "ON"
+    "Reading":
+        Office Ceiling light 1:
+          state: "OFF"
+        Office Ceiling light 2:
+          state: "OFF"
+        Office Ceiling light 3:
+          state: "OFF"
+        Office Window light bar:
+          state: "ON"
+          brightness: 200
+          color_temp: cool
+        Office Reading light plug:
+          state: "ON"
+    "Cozy":
+        Office Ceiling light 1:
+          state: "OFF"
+        Office Ceiling light 2:
+          state: "OFF"
+        Office Ceiling light 3:
+          state: "OFF"
+        Office Window light bar:
+          state: "ON"
+          brightness: 75
+          color_temp: warm
+        Office Reading light plug:
+          state: "OFF"

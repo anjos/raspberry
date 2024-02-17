@@ -1,0 +1,168 @@
+Living room:
+    "Off":
+        Living room Ceiling light 1:
+          state: "OFF"
+        Living room Ceiling light 2:
+          state: "OFF"
+        Living room Ceiling light 3:
+          state: "OFF"
+        Living room Ceiling light 4:
+          state: "OFF"
+        Living room Table light 1:
+          state: "OFF"
+        Living room Table light 2:
+          state: "OFF"
+        Living room Photo frame plug:
+          state: "OFF"
+        Living room Window side table light:
+          state: "OFF"
+        Living room Corner side table light:
+          state: "OFF"
+        Living room TV side table light:
+          state: "OFF"
+        Living room Light stand:
+          state: "OFF"
+        Living room Corridor ceiling light:
+          state: "OFF"
+    "On":
+        Living room Ceiling light 1:
+          state: "ON"
+          brightness: 254
+          color_temp: cool
+        Living room Ceiling light 2:
+          state: "ON"
+          brightness: 254
+          color_temp: cool
+        Living room Ceiling light 3:
+          state: "ON"
+          brightness: 254
+          color_temp: cool
+        Living room Ceiling light 4:
+          state: "ON"
+          brightness: 254
+          color_temp: cool
+        Living room Table light 1:
+          state: "ON"
+          brightness: 254
+          color_temp: cool
+        Living room Table light 2:
+          state: "ON"
+          brightness: 254
+          color_temp: cool
+        Living room Photo frame plug:
+          state: "ON"
+        Living room Window side table light:
+          state: "ON"
+          brightness: 254
+          color_temp: 250  # cool
+        Living room Corner side table light:
+          state: "ON"
+          brightness: 254
+          color_temp: cool
+        Living room TV side table light:
+          state: "ON"
+          brightness: 254
+          color_temp: cool
+        Living room Light stand:
+          state: "ON"
+          brightness: 254
+          color_temp: cool
+        Living room Corridor ceiling light:
+          state: "ON"
+          brightness: 254
+          color_temp: cool
+    "Dinner":
+        Living room Ceiling light 1:
+          state: "OFF"
+        Living room Ceiling light 2:
+          state: "OFF"
+        Living room Ceiling light 3:
+          state: "OFF"
+        Living room Ceiling light 4:
+          state: "OFF"
+        Living room Table light 1:
+          state: "ON"
+          brightness: 254
+          color_temp: 280
+        Living room Table light 2:
+          state: "ON"
+          brightness: 254
+          color_temp: 280
+        Living room Photo frame plug:
+          state: "ON"
+        Living room Window side table light:
+          state: "ON"
+          brightness: 254
+          color_temp: 370  # neutral
+        Living room Corner side table light:
+          state: "ON"
+          brightness: 254
+          color_temp: neutral
+        Living room TV side table light:
+          state: "ON"
+          brightness: 254
+          color_temp: neutral
+        Living room Light stand:
+          state: "ON"
+          brightness: 254
+          color_temp: neutral
+        Living room Corridor ceiling light:
+          state: "OFF"
+    "Relax":
+        Living room Ceiling light 1:
+          state: "OFF"
+        Living room Ceiling light 2:
+          state: "OFF"
+        Living room Ceiling light 3:
+          state: "OFF"
+        Living room Ceiling light 4:
+          state: "OFF"
+        Living room Table light 1:
+          state: "OFF"
+        Living room Table light 2:
+          state: "OFF"
+        Living room Photo frame plug:
+          state: "ON"
+        Living room Window side table light:
+          state: "ON"
+          brightness: 200
+          color_temp: 370  # neutral
+        Living room Corner side table light:
+          state: "ON"
+          brightness: 200
+          color_temp: neutral
+        Living room TV side table light:
+          state: "ON"
+          brightness: 200
+          color_temp: neutral
+        Living room Light stand:
+          state: "OFF"
+        Living room Corridor ceiling light:
+          state: "OFF"
+    "TV":
+        Living room Ceiling light 1:
+          state: "OFF"
+        Living room Ceiling light 2:
+          state: "OFF"
+        Living room Ceiling light 3:
+          state: "OFF"
+        Living room Ceiling light 4:
+          state: "OFF"
+        Living room Table light 1:
+          state: "OFF"
+        Living room Table light 2:
+          state: "OFF"
+        Living room Photo frame plug:
+          state: "OFF"
+        Living room Window side table light:
+          state: "ON"  # Ikea bulb cannot be controlled on OFF state!
+          brightness: 2
+          color_temp: 454  # warm
+        Living room Corner side table light:
+          state: "OFF"
+        Living room TV side table light:
+          state: "OFF"
+        Living room Light stand:
+          state: "OFF"
+        Living room Corridor ceiling light:
+          state: "OFF"

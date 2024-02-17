@@ -1,0 +1,44 @@
+version: "3"
+
+services:
+
+  rsnapshot:
+    image: lscr.io/linuxserver/rsnapshot:latest
+    container_name: rsnapshot
+    hostname: raspberry
+    volumes:
+      - rsnapshot:/config
+      - /backup:/.snapshots
+      - media_deluge:/data/media_deluge
+      - media_plex:/data/media_plex
+      - monitor_diun:/data/monitor_diun
+      - portainer:/data/portainer
+      - smarthome_homebridge:/data/smarthome_homebridge
+      - smarthome_mosquitto_data:/data/smarthome_mosquitto_data
+      - smarthome_mosquitto_log:/data/smarthome_mosquitto_data
+      - smarthome_zigbee2mqtt:/data/smarthome_zigbee2mqtt
+    restart: always
+    environment:
+      - "TZ=Europe/Zurich"
+      - "PUID=1000"
+      - "PGID=1000"
+
+
+volumes:
+  rsnapshot:
+  media_deluge:
+    external: true
+  media_plex:
+    external: true
+  monitor_diun:
+    external: true
+  portainer:
+    external: true
+  smarthome_homebridge:
+    external: true
+  smarthome_mosquitto_data:
+    external: true
+  smarthome_mosquitto_log:
+    external: true
+  smarthome_zigbee2mqtt:
+    external: true

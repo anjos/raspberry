@@ -1,0 +1,69 @@
+David:
+    "Off":
+        David Ceiling light 1:
+          state: "OFF"
+        David Ceiling light 2:
+          state: "OFF"
+        David Ceiling light 3:
+          state: "OFF"
+        David Reading light 1:
+          state: "OFF"
+        David Reading light 2:
+          state: "OFF"
+        David Reading light plug:
+          state: "OFF"
+    "On":
+        David Ceiling light 1:
+          state: "ON"
+          brightness: 254
+          color_temp: cool
+        David Ceiling light 2:
+          state: "ON"
+          brightness: 254
+          color_temp: cool
+        David Ceiling light 3:
+          state: "ON"
+          brightness: 254
+          color_temp: cool
+        David Reading light 1:
+          state: "ON"
+          brightness: 254
+          color_temp: cool
+        David Reading light 2:
+          state: "ON"
+          brightness: 254
+          color_temp: cool
+        David Reading light plug:
+          state: "ON"
+    "Reading":
+        David Ceiling light 1:
+          state: "OFF"
+        David Ceiling light 2:
+          state: "OFF"
+        David Ceiling light 3:
+          state: "OFF"
+        David Reading light 1:
+          state: "ON"
+          brightness: 200
+          color_temp: cool
+        David Reading light 2:
+          state: "ON"
+          brightness: 200
+          color_temp: cool
+        David Reading light plug:
+          state: "ON"
+    "Sleeping":
+        David Ceiling light 1:
+          state: "OFF"
+        David Ceiling light 2:
+          state: "OFF"
+        David Ceiling light 3:
+          state: "OFF"
+        David Reading light 1:
+          state: "OFF"
+        David Reading light 2:
+          state: "ON"
+          brightness: 2
+          color_temp: warm
+        David Reading light plug:
+          state: "OFF"

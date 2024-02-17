@@ -1,0 +1,41 @@
+A2:
+    "Off":
+        A2 Ceiling light:
+          state: "OFF"
+        A2 Reading light Andre:
+          state: "OFF"
+        A2 Reading light Aninha:
+          state: "OFF"
+    "On":
+        A2 Ceiling light:
+          state: "ON"
+          brightness: 254
+          color_temp: cool
+        A2 Reading light Andre:
+          state: "ON"
+          brightness: 254
+          color_temp: cool
+        A2 Reading light Aninha:
+          state: "ON"
+          brightness: 254
+          color_temp: cool
+    "Reading":
+        A2 Ceiling light:
+          state: "OFF"
+        A2 Reading light Andre:
+          state: "ON"
+          brightness: 200
+          color_temp: cool
+        A2 Reading light Aninha:
+          state: "ON"
+          brightness: 200
+          color_temp: cool
+    "Cozy":
+        A2 Ceiling light:
+          state: "OFF"
+        A2 Reading light Andre:
+          state: "ON"
+          brightness: 2
+          color_temp: warm
+        A2 Reading light Aninha:
+          state: "OFF"

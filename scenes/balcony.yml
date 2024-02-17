@@ -1,0 +1,30 @@
+Balcony:
+    "Off":
+        Balcony Ceiling light 1:
+          state: "OFF"
+        Balcony Ceiling light 2:
+          state: "OFF"
+        Balcony Light bar:
+          state: "OFF"
+    "On":
+        Balcony Ceiling light 1:
+          state: "ON"
+          brightness: 254
+          color_temp: cool
+        Balcony Ceiling light 2:
+          state: "ON"
+          brightness: 254
+          color_temp: cool
+        Balcony Light bar:
+          state: "ON"
+          brightness: 254
+          color_temp: cool
+    "Cozy":
+        Balcony Ceiling light 1:
+          state: "OFF"
+        Balcony Ceiling light 2:
+          state: "OFF"
+        Balcony Light bar:
+          state: "ON"
+          brightness: 160
+          color_temp: neutral

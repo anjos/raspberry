@@ -1,0 +1,91 @@
+Kitchen:
+    "Off":
+        Kitchen Ceiling light:
+          state: "OFF"
+          brightness: 0
+        Kitchen Cupboard light bar:
+          state: "OFF"
+          brightness: 0
+        Kitchen Counter overhead light 1:
+          state: "OFF"
+          brightness: 0
+        Kitchen Counter overhead light 2:
+          state: "OFF"
+          brightness: 0
+        Kitchen Counter overhead light 3:
+          state: "OFF"
+          brightness: 0
+        Kitchen Counter overhead light 4:
+          state: "OFF"
+          brightness: 0
+    "On":
+        Kitchen Ceiling light:
+          state: "ON"
+          brightness: 254
+          color_temp: cool
+        Kitchen Cupboard light bar:
+          state: "ON"
+          brightness: 254
+          color_temp: cool
+        Kitchen Counter overhead light 1:
+          state: "ON"
+          brightness: 254
+          color_temp: 340
+        Kitchen Counter overhead light 2:
+          state: "ON"
+          brightness: 254
+          color_temp: 340
+        Kitchen Counter overhead light 3:
+          state: "ON"
+          brightness: 254
+          color_temp: 340
+        Kitchen Counter overhead light 4:
+          state: "ON"
+          brightness: 254
+          color_temp: 340
+    "Night":
+        Kitchen Ceiling light:
+          state: "OFF"
+        Kitchen Cupboard light bar:
+          state: "ON"
+          brightness: 200
+          color_temp: 310
+        Kitchen Counter overhead light 1:
+          state: "ON"
+          brightness: 254
+          color_temp: warm
+        Kitchen Counter overhead light 2:
+          state: "ON"
+          brightness: 254
+          color_temp: warm
+        Kitchen Counter overhead light 3:
+          state: "ON"
+          brightness: 254
+          color_temp: warm
+        Kitchen Counter overhead light 4:
+          state: "ON"
+          brightness: 254
+          color_temp: warm
+    "Cozy":
+        Kitchen Ceiling light:
+          state: "OFF"
+        Kitchen Cupboard light bar:
+          state: "ON"
+          brightness: 10
+          color_temp: neutral
+        Kitchen Counter overhead light 1:
+          state: "ON"
+          brightness: 5
+          color_temp: warm
+        Kitchen Counter overhead light 2:
+          state: "ON"
+          brightness: 5
+          color_temp: warm
+        Kitchen Counter overhead light 3:
+          state: "ON"
+          brightness: 5
+          color_temp: warm
+        Kitchen Counter overhead light 4:
+          state: "ON"
+          brightness: 5
+          color_temp: warm
