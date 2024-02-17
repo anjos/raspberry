@@ -6,7 +6,7 @@ services:
   plex:
     image: lscr.io/linuxserver/plex:latest
     container_name: plex
-    restart: always
+    restart: unless-stopped
     hostname: raspberry
     network_mode: bridge
     ports:
@@ -31,9 +31,9 @@ services:
     environment:
       - "VERSION=docker"
       - "PLEX_CLAIM=${PLEX_CLAIM}"
-      - "TZ=Europe/Zurich"
-      - "PUID=1000"
-      - "PGID=1000"
+      - "TZ=${TZ}"
+      - "PUID=${PUID}"
+      - "PGID=${PGID}"
     devices:
       - "/dev/dri:/dev/dri"
 
@@ -41,7 +41,7 @@ services:
   deluge:
     image: lscr.io/linuxserver/deluge:latest
     container_name: deluge
-    restart: always
+    restart: unless-stopped
     hostname: raspberry
     network_mode: bridge
     ports:
@@ -60,11 +60,36 @@ services:
       - "/media/downloads:/downloads"
     environment:
       - "DELUGE_LOGLEVEL=error"
-      - "TZ=Europe/Zurich"
-      - "PUID=1000"
-      - "PGID=1000"
+      - "TZ=${TZ}"
+      - "PUID=${PUID}"
+      - "PGID=${PGID}"
+
+  # Movie organizer/manager for usenet and torrent users.
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    restart: unless-stopped
+    hostname: raspberry
+    network_mode: bridge
+    ports:
+      - 7878:7878
+    healthcheck:
+      test: curl --fail localhost:7878 || exit 1
+      interval: 60s
+      retries: 5
+      start_period: 30s
+      timeout: 2s
+    environment:
+      - "TZ=${TZ}"
+      - "PUID=${PUID}"
+      - "PGID=${PGID}"
+    volumes:
+      - "radarr:/config"
+      - /media:/media
+
 
 # Create volumes by visiting the "Volumes" tab on the left
 volumes:
   plex:
   deluge:
+  radarr:
