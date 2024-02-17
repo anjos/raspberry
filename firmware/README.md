@@ -12,16 +12,14 @@ https://dialedin.com.au/blog/sonoff-zbdongle-e-rcp-firmware
 Create the conda/mamba environment if it does not already exists:
 
 ```sh
-$ mamba create -n flasher python=3 pip
-$ conda activate flasher
-(flasher) $ pip3 install universal-silabs-flasher
+$ mamba env create -n sonoff-flasher -f environment.yml
+$ conda activate sonoff-flasher
 ```
 
 Use it with:
 
 ```sh
-$ conda activate flasher
-(flasher) $ universal-silabs-flasher --device /dev/ttyACM0 flash --firmware ./ncp-uart-sw_EZNet6.10.3_V1.0.1.gbl
+(sonoff-flasher) $ universal-silabs-flasher --device /dev/ttyACM0 flash --firmware ./ncp-uart-sw_EZNet6.10.3_V1.0.1.gbl
 ```
 
 WARNING: The other firmware (`rcp-uart-802154-v4.3.1-zbdonglee-460800.gbl`)
@@ -31,6 +29,5 @@ manages to connect to the dongle once the firmware is flush.
 To flash this firmware use a further option:
 
 ```sh
-$ conda activate flasher
-(flasher) $ universal-silabs-flasher --device /dev/ttyACM0 flash --firmware ./rcp-uart-802154-v4.3.1-zbdonglee-460800.gbl --allow-cross-flashing`
+(sonoff-flasher) $ universal-silabs-flasher --device /dev/ttyACM0 flash --firmware ./rcp-uart-802154-v4.3.1-zbdonglee-460800.gbl --allow-cross-flashing`
 ```

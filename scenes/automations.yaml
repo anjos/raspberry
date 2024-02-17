@@ -1,0 +1,640 @@
+# Automations for home
+# --------------------
+# Source code and instructions at: https://github.com/Luligu/zigbee2mqtt-automations
+
+
+# Office Desk switch bindings
+# ---------------------------
+
+office/desk/switch toggle/OFF:
+  active: true
+  trigger:
+    entity: office/desk/switch
+    action: toggle
+  action:
+    entity: Office
+    payload: {"scene_recall": 0}
+
+office/desk/switch down/OFF:
+  active: true
+  trigger:
+    entity: office/desk/switch
+    action: brightness_down_click
+  action:
+    entity: Office
+    payload: {"scene_recall": 0}
+
+office/desk/switch up/ON:
+  active: true
+  trigger:
+    entity: office/desk/switch
+    action: brightness_up_click
+  action:
+    entity: Office
+    payload: {"scene_recall": 1}
+
+office/desk/switch right/Reading:
+  active: true
+  trigger:
+    entity: office/desk/switch
+    action: arrow_right_click
+  action:
+    entity: Office
+    payload: {"scene_recall": 2}
+
+office/desk/switch left/Cozy:
+  active: true
+  trigger:
+    entity: office/desk/switch
+    action: arrow_left_click
+  action:
+    entity: Office
+    payload: {"scene_recall": 3}
+
+
+# Office Wall switch bindings
+# ---------------------------
+
+office/wall/switch 1 and 3/ON:
+  active: true
+  trigger:
+    entity: office/wall/switch
+    action: press_1_and_3  # top buttons
+  action:
+    entity: Entrance
+    payload: {"scene_recall": 3}
+
+office/wall/switch 2 and 4/OFF:
+  active: true
+  trigger:
+    entity: office/wall/switch
+    action: press_2_and_4  # bottom buttons
+  action:
+    entity: Entrance
+    payload: {"scene_recall": 0}
+
+office/wall/switch 1/ON:
+  active: true
+  trigger:
+    entity: office/wall/switch
+    action: press_1  # top left
+  action:
+    entity: Office
+    payload: {"scene_recall": 1}
+
+office/wall/switch 2/OFF:
+  active: true
+  trigger:
+    entity: office/wall/switch
+    action: press_2  # bottom left
+  action:
+    entity: Office
+    payload: {"scene_recall": 0}
+
+office/wall/switch 3/Reading:
+  active: true
+  trigger:
+    entity: office/wall/switch
+    action: press_3  # top right
+  action:
+    entity: Office
+    payload: {"scene_recall": 2}
+
+office/wall/switch 4/Cozy:
+  active: true
+  trigger:
+    entity: office/wall/switch
+    action: press_4  # bottom right
+  action:
+    entity: Office
+    payload: {"scene_recall": 3}
+
+
+# David Desk switch bindings
+# --------------------------
+
+david/desk/switch down/OFF:
+  active: true
+  trigger:
+    entity: david/desk/switch
+    action: off_press
+  action:
+    entity: David
+    payload: {"scene_recall": 0}
+
+david/desk/switch up/ON:
+  active: true
+  trigger:
+    entity: david/desk/switch
+    action: on_press
+  action:
+    entity: David
+    payload: {"scene_recall": 1}
+
+david/desk/switch left/Reading:
+  active: true
+  trigger:
+    entity: david/desk/switch
+    action: up_press
+  action:
+    entity: David
+    payload: {"scene_recall": 2}
+
+david/desk/switch left/Sleeping:
+  active: true
+  trigger:
+    entity: david/desk/switch
+    action: down_press
+  action:
+    entity: David
+    payload: {"scene_recall": 3}
+
+
+# David Wall switch bindings
+# ---------------------------
+
+david/wall/switch 1/ON:
+  active: true
+  trigger:
+    entity: david/wall/switch
+    action: press_1  # top left
+  action:
+    entity: David
+    payload: {"scene_recall": 1}
+
+david/wall/switch 2/OFF:
+  active: true
+  trigger:
+    entity: david/wall/switch
+    action: press_2  # bottom left
+  action:
+    entity: David
+    payload: {"scene_recall": 0}
+
+david/wall/switch 3/Reading:
+  active: true
+  trigger:
+    entity: david/wall/switch
+    action: press_3  # top right
+  action:
+    entity: David
+    payload: {"scene_recall": 2}
+
+david/wall/switch 4/Sleeping:
+  active: true
+  trigger:
+    entity: david/wall/switch
+    action: press_4  # bottom right
+  action:
+    entity: David
+    payload: {"scene_recall": 3}
+
+
+# A2 Aninha's Night stand switch bindings
+# ---------------------------------------
+
+a2/aninha/nightstand/switch toggle/OFF:
+  active: true
+  trigger:
+    entity: a2/aninha/nightstand/switch
+    action: toggle
+  action:
+    entity: A2
+    payload: {"scene_recall": 0}
+
+a2/aninha/nightstand/switch down/OFF:
+  active: true
+  trigger:
+    entity: a2/aninha/nightstand/switch
+    action: brightness_down_click
+  action:
+    entity: A2
+    payload: {"scene_recall": 0}
+
+a2/aninha/nightstand/switch up/ON:
+  active: true
+  trigger:
+    entity: a2/aninha/nightstand/switch
+    action: brightness_up_click
+  action:
+    entity: A2
+    payload: {"scene_recall": 1}
+
+a2/aninha/nightstand/switch right/Reading:
+  active: true
+  trigger:
+    entity: a2/aninha/nightstand/switch
+    action: arrow_right_click
+  action:
+    entity: A2
+    payload: {"scene_recall": 3}
+
+a2/aninha/nightstand/switch left/Cozy:
+  active: true
+  trigger:
+    entity: a2/aninha/nightstand/switch
+    action: arrow_left_click
+  action:
+    entity: A2
+    payload: {"scene_recall": 2}
+
+
+# A2 Andre's Night stand switch bindings
+# --------------------------------------
+
+a2/wall/switch 1 and 3/ON:
+  active: true
+  trigger:
+    entity: a2/wall/switch
+    action: press_1_and_3  # top buttons
+  action:
+    entity: David
+    payload: {"scene_recall": 3}
+
+a2/wall/switch 2 and 4/OFF:
+  active: true
+  trigger:
+    entity: a2/wall/switch
+    action: press_2_and_4  # bottom buttons
+  action:
+    entity: David
+    payload: {"scene_recall": 0}
+
+a2/andre/nightstand/switch toggle/OFF:
+  active: true
+  trigger:
+    entity: a2/andre/nightstand/switch
+    action: toggle
+  action:
+    entity: A2
+    payload: {"scene_recall": 0}
+
+a2/andre/nightstand/switch down/OFF:
+  active: true
+  trigger:
+    entity: a2/andre/nightstand/switch
+    action: brightness_down_click
+  action:
+    entity: A2
+    payload: {"scene_recall": 0}
+
+a2/andre/nightstand/switch up/ON:
+  active: true
+  trigger:
+    entity: a2/andre/nightstand/switch
+    action: brightness_up_click
+  action:
+    entity: A2
+    payload: {"scene_recall": 1}
+
+a2/andre/nightstand/switch right/Reading:
+  active: true
+  trigger:
+    entity: a2/andre/nightstand/switch
+    action: arrow_right_click
+  action:
+    entity: A2
+    payload: {"scene_recall": 2}
+
+a2/andre/nightstand/switch left/Cozy:
+  active: true
+  trigger:
+    entity: a2/andre/nightstand/switch
+    action: arrow_left_click
+  action:
+    entity: A2
+    payload: {"scene_recall": 3}
+
+
+# A2 Wall switch bindings
+# -----------------------
+
+a2/wall/switch 1/ON:
+  active: true
+  trigger:
+    entity: a2/wall/switch
+    action: press_1  # top left
+  action:
+    entity: A2
+    payload: {"scene_recall": 1}
+
+a2/wall/switch 2/OFF:
+  active: true
+  trigger:
+    entity: a2/wall/switch
+    action: press_2  # bottom left
+  action:
+    entity: A2
+    payload: {"scene_recall": 0}
+
+a2/wall/switch 3/Reading:
+  active: true
+  trigger:
+    entity: a2/wall/switch
+    action: press_3  # top right
+  action:
+    entity: A2
+    payload: {"scene_recall": 2}
+
+a2/wall/switch 4/Sleeping:
+  active: true
+  trigger:
+    entity: a2/wall/switch
+    action: press_4  # bottom right
+  action:
+    entity: A2
+    payload: {"scene_recall": 3}
+
+
+# Kitchen Wall switch bindings
+# ----------------------------
+
+kitchen/wall/switch 1 and 3/ON:
+  active: true
+  trigger:
+    entity: kitchen/wall/switch
+    action: press_1_and_3  # top buttons
+  action:
+    entity: Balcony
+    payload: {"scene_recall": 1}
+
+kitchen/wall/switch 2 and 4/OFF:
+  active: true
+  trigger:
+    entity: kitchen/wall/switch
+    action: press_2_and_4  # bottom buttons
+  action:
+    entity: Balcony
+    payload: {"scene_recall": 0}
+
+kitchen/wall/switch 1/ON:
+  active: true
+  trigger:
+    entity: kitchen/wall/switch
+    action: press_1  # top left
+  action:
+    entity: Kitchen
+    payload: {"scene_recall": 1}
+
+kitchen/wall/switch 2/OFF:
+  active: true
+  trigger:
+    entity: kitchen/wall/switch
+    action: press_2  # bottom left
+  action:
+    entity: Kitchen
+    payload: {"scene_recall": 0}
+
+kitchen/wall/switch 3/Night:
+  active: true
+  trigger:
+    entity: kitchen/wall/switch
+    action: press_3  # top right
+  action:
+    entity: Kitchen
+    payload: {"scene_recall": 2}
+
+kitchen/wall/switch 4/Cozy:
+  active: true
+  trigger:
+    entity: kitchen/wall/switch
+    action: press_4  # bottom right
+  action:
+    entity: Kitchen
+    payload: {"scene_recall": 3}
+
+
+# Balcony desk switch bindings
+# ----------------------------
+
+balcony/desk/switch toggle/OFF:
+  active: true
+  trigger:
+    entity: balcony/desk/switch
+    action: toggle
+  action:
+    entity: Balcony
+    payload: {"scene_recall": 0}
+
+balcony/desk/switch down/OFF:
+  active: true
+  trigger:
+    entity: balcony/desk/switch
+    action: brightness_down_click
+  action:
+    entity: Balcony
+    payload: {"scene_recall": 0}
+
+balcony/desk/switch up/ON:
+  active: true
+  trigger:
+    entity: balcony/desk/switch
+    action: brightness_up_click
+  action:
+    entity: Balcony
+    payload: {"scene_recall": 1}
+
+balcony/desk/switch right/Reading:
+  active: true
+  trigger:
+    entity: balcony/desk/switch
+    action: arrow_right_click
+  action:
+    entity: Balcony
+    payload: {"scene_recall": 1}
+
+balcony/desk/switch left/Cozy:
+  active: true
+  trigger:
+    entity: balcony/desk/switch
+    action: arrow_left_click
+  action:
+    entity: Balcony
+    payload: {"scene_recall": 2}
+
+
+# Living room wall switch bindings
+# --------------------------------
+
+living-room/wall/switch 1 and 3/ON:
+  active: true
+  trigger:
+    entity: living-room/wall/switch
+    action: press_1_and_3  # top buttons
+  action:
+    entity: Living room
+    payload: {"scene_recall": 1}
+
+living-room/wall/switch 2 and 4/OFF:
+  active: true
+  trigger:
+    entity: living-room/wall/switch
+    action: press_2_and_4  # bottom buttons
+  action:
+    entity: Living room
+    payload: {"scene_recall": 0}
+
+living-room/wall/switch 1/Dinner:
+  active: true
+  trigger:
+    entity: living-room/wall/switch
+    action: press_1  # top left
+  action:
+    entity: Living room
+    payload: {"scene_recall": 2}
+
+living-room/wall/switch 2/Cozy:
+  active: true
+  trigger:
+    entity: living-room/wall/switch
+    action: press_2  # bottom left
+  action:
+    entity: Living room
+    payload: {"scene_recall": 3}
+
+living-room/wall/switch 3/ON:
+  active: true
+  trigger:
+    entity: living-room/wall/switch
+    action: press_3  # top right
+  action:
+    entity: Living room
+    payload: {"scene_recall": 1}
+
+living-room/wall/switch 4/TV:
+  active: true
+  trigger:
+    entity: living-room/wall/switch
+    action: press_4  # bottom right
+  action:
+    entity: Living room
+    payload: {"scene_recall": 4}
+
+
+# Living room side table switch bindings
+# --------------------------------------
+
+living-room/side-table/switch toggle/OFF:
+  active: true
+  trigger:
+    entity: living-room/side-table/switch
+    action: toggle
+  action:
+    entity: Living room
+    payload: {"scene_recall": 0}
+
+living-room/side-table/switch down/TV:
+  active: true
+  trigger:
+    entity: living-room/side-table/switch
+    action: brightness_down_click
+  action:
+    entity: Living room
+    payload: {"scene_recall": 4}
+
+living-room/side-table/switch up/ON:
+  active: true
+  trigger:
+    entity: living-room/side-table/switch
+    action: brightness_up_click
+  action:
+    entity: Living room
+    payload: {"scene_recall": 1}
+
+living-room/side-table/switch right/Dinner:
+  active: true
+  trigger:
+    entity: living-room/side-table/switch
+    action: arrow_right_click
+  action:
+    entity: Living room
+    payload: {"scene_recall": 2}
+
+living-room/side-table/switch left/Relax:
+  active: true
+  trigger:
+    entity: living-room/side-table/switch
+    action: arrow_left_click
+  action:
+    entity: Living room
+    payload: {"scene_recall": 3}
+
+
+# Entrance wall switch bindings
+# -----------------------------
+
+entrance/wall/switch 1 and 3/ON:
+  active: true
+  trigger:
+    entity: entrance/wall/switch
+    action: press_1_and_3  # top buttons
+  action:
+    - entity: Entrance
+      payload: {"scene_recall": 2}
+    - entity: Office
+      payload: {"scene_recall": 2}
+    - entity: David
+      payload: {"scene_recall": 2}
+    - entity: A2
+      payload: {"scene_recall": 2}
+    - entity: Living room
+      payload: {"scene_recall": 2}
+    - entity: Kitchen
+      payload: {"scene_recall": 2}
+
+entrance/wall/switch 2 and 4/OFF:
+  active: true
+  trigger:
+    entity: entrance/wall/switch
+    action: press_2_and_4  # bottom buttons
+  action:
+    - entity: Entrance
+      payload: {"scene_recall": 0}
+    - entity: Office
+      payload: {"scene_recall": 0}
+    - entity: David
+      payload: {"scene_recall": 0}
+    - entity: A2
+      payload: {"scene_recall": 0}
+    - entity: Living room
+      payload: {"scene_recall": 0}
+    - entity: Kitchen
+      payload: {"scene_recall": 0}
+    - entity: Balcony
+      payload: {"scene_recall": 0}
+
+entrance/wall/switch 1/ON:
+  active: true
+  trigger:
+    entity: entrance/wall/switch
+    action: press_1  # top left
+  action:
+    entity: Entrance
+    payload: {"scene_recall": 1}
+
+entrance/wall/switch 2/OFF:
+  active: true
+  trigger:
+    entity: entrance/wall/switch
+    action: press_2  # bottom left
+  action:
+    entity: Entrance
+    payload: {"scene_recall": 0}
+
+entrance/wall/switch 3/Bright:
+  active: true
+  trigger:
+    entity: entrance/wall/switch
+    action: press_3  # top right
+  action:
+    entity: Entrance
+    payload: {"scene_recall": 2}
+
+entrance/wall/switch 4/Cozy:
+  active: true
+  trigger:
+    entity: entrance/wall/switch
+    action: press_4  # bottom right
+  action:
+    entity: Entrance
+    payload: {"scene_recall": 3}

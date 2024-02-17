@@ -120,7 +120,7 @@ def main():
     args = parser.parse_args()
     data = parse_yaml_files([args.yaml_file])
     client = dict(
-        hostname="localhost",
+        hostname="raspberry.local",
         port=1883,
         protocol=paho.mqtt.enums.MQTTProtocolVersion.MQTTv5,
     )
