@@ -8,7 +8,8 @@ services:
     container_name: plex
     restart: unless-stopped
     hostname: plex
-    network_mode: bridge
+    networks:
+      - network
     ports:
       - 32400:32400/tcp
       - 8324:8324/tcp
@@ -43,7 +44,8 @@ services:
     container_name: deluge
     restart: unless-stopped
     hostname: deluge
-    network_mode: bridge
+    networks:
+      - network
     ports:
       - 8112:8112
       - 6881:6881
@@ -70,7 +72,8 @@ services:
     container_name: radarr
     restart: unless-stopped
     hostname: radarr
-    network_mode: bridge
+    networks:
+      - network
     ports:
       - 7878:7878
     healthcheck:
@@ -87,6 +90,10 @@ services:
       - "radarr:/config"
       - /media:/media
 
+# Networks for media services - allow services to be recognized by name
+networks:
+  network:
+    driver: bridge
 
 # Create volumes by visiting the "Volumes" tab on the left
 volumes:
