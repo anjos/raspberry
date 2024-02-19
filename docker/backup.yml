@@ -17,8 +17,7 @@ services:
       - monitor_diun:/data/monitor_diun
       - portainer:/data/portainer
       - smarthome_homebridge:/data/smarthome_homebridge
-      - smarthome_mosquitto_data:/data/smarthome_mosquitto_data
-      - smarthome_mosquitto_log:/data/smarthome_mosquitto_data
+      - smarthome_mosquitto:/data/smarthome_mosquitto
       - smarthome_zigbee2mqtt:/data/smarthome_zigbee2mqtt
     environment:
       - "TZ=${TZ}"
@@ -40,9 +39,7 @@ volumes:
     external: true
   smarthome_homebridge:
     external: true
-  smarthome_mosquitto_data:
-    external: true
-  smarthome_mosquitto_log:
+  smarthome_mosquitto:
     external: true
   smarthome_zigbee2mqtt:
     external: true
