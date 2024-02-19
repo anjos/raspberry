@@ -12,8 +12,9 @@ services:
       - rsnapshot:/config
       - /backup:/.snapshots
       - media_deluge:/data/media_deluge
-      - media_radarr:/data/media_radarr
       - media_plex:/data/media_plex
+      - media_radarr:/data/media_radarr
+      - media_jackett:/data/media_jackett
       - monitor_diun:/data/monitor_diun
       - portainer:/data/portainer
       - smarthome_mosquitto_data:/data/smarthome_mosquitto_data
@@ -30,9 +31,11 @@ volumes:
   rsnapshot:
   media_deluge:
     external: true
+  media_plex:
+    external: true
   media_radarr:
     external: true
-  media_plex:
+  media_jackett:
     external: true
   monitor_diun:
     external: true

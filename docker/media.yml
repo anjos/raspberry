@@ -90,6 +90,25 @@ services:
       - "radarr:/config"
       - /media:/media
 
+  # Centralized indexer
+  jackett:
+    image: lscr.io/linuxserver/jackett:latest
+    container_name: jackett
+    restart: unless-stopped
+    hostname: jackett
+    networks:
+      - network
+    ports:
+      - 9117:9117
+    environment:
+      - "TZ=${TZ}"
+      - "PUID=${PUID}"
+      - "PGID=${PGID}"
+    volumes:
+      - "jackett:/config"
+      - /media/downloads:/downloads
+
+
 # Networks for media services - allow services to be recognized by name
 networks:
   network:
@@ -100,3 +119,4 @@ volumes:
   plex:
   deluge:
   radarr:
+  jackett:
