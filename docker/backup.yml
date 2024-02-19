@@ -16,7 +16,8 @@ services:
       - media_plex:/data/media_plex
       - monitor_diun:/data/monitor_diun
       - portainer:/data/portainer
-      - smarthome_mosquitto:/data/smarthome_mosquitto
+      - smarthome_mosquitto_data:/data/smarthome_mosquitto_data
+      - smarthome_mosquitto_log:/data/smarthome_mosquitto_log
       - smarthome_zigbee2mqtt:/data/smarthome_zigbee2mqtt
       - smarthome_homebridge:/data/smarthome_homebridge
     environment:
@@ -37,7 +38,9 @@ volumes:
     external: true
   portainer:
     external: true
-  smarthome_mosquitto:
+  smarthome_mosquitto_data:
+    external: true
+  smarthome_mosquitto_log:
     external: true
   smarthome_zigbee2mqtt:
     external: true
