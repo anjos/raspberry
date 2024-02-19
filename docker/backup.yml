@@ -5,6 +5,8 @@ services:
   rsnapshot:
     image: lscr.io/linuxserver/rsnapshot:latest
     container_name: rsnapshot
+    restart: always
+    network_mode: bridge
     hostname: raspberry
     volumes:
       - rsnapshot:/config
@@ -17,11 +19,10 @@ services:
       - smarthome_mosquitto_data:/data/smarthome_mosquitto_data
       - smarthome_mosquitto_log:/data/smarthome_mosquitto_data
       - smarthome_zigbee2mqtt:/data/smarthome_zigbee2mqtt
-    restart: always
     environment:
-      - "TZ=Europe/Zurich"
-      - "PUID=1000"
-      - "PGID=1000"
+      - "TZ=${TZ}"
+      - "PUID=${PUID}"
+      - "PGID=${PGID}"
 
 
 volumes:
