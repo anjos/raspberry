@@ -5,9 +5,10 @@ services:
   mosquitto:
     image: eclipse-mosquitto:latest
     container_name: mosquitto
-    hostname: raspberry
+    hostname: mosquitto
     restart: always
-    network_mode: bridge
+    networks:
+      - network
     ports:
       - 1883:1883
       - 9001:9001
@@ -23,14 +24,15 @@ services:
       start_period: 30s
       start_interval: 5s
     environment:
-      - "TZ=Europe/Zurich"
+      - "TZ=${TZ}"
 
   zigbee2mqtt:
     image: koenkk/zigbee2mqtt:latest
     container_name: zigbee2mqtt
-    hostname: raspberry
+    hostname: zigbee2mqtt
     restart: always
-    network_mode: bridge
+    networks:
+      - network
     ports:
       - 8080:8080
     volumes:
@@ -49,13 +51,13 @@ services:
       start_period: 30s
       start_interval: 5s
     environment:
-      - "TZ=Europe/Zurich"
+      - "TZ=${TZ}"
 
   # Connection between zigbee server and Apple HomeKit
   homebridge:
     image: homebridge/homebridge:latest
     container_name: homebridge
-    hostname: raspberry
+    hostname: homebridge
     restart: always
     network_mode: host
     volumes:
@@ -76,7 +78,12 @@ services:
         max-size: "10m"
         max-file: "1"
     environment:
-      - "TZ=Europe/Zurich"
+      - "TZ=${TZ}"
+
+# Networks for smarthome services - allow services to be recognized by name
+networks:
+  network:
+    driver: bridge
 
 volumes:
   mosquitto_data:
