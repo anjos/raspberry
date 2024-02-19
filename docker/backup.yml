@@ -12,6 +12,7 @@ services:
       - rsnapshot:/config
       - /backup:/.snapshots
       - media_deluge:/data/media_deluge
+      - media_radarr:/data/media_radarr
       - media_plex:/data/media_plex
       - monitor_diun:/data/monitor_diun
       - portainer:/data/portainer
@@ -28,6 +29,8 @@ services:
 volumes:
   rsnapshot:
   media_deluge:
+    external: true
+  media_radarr:
     external: true
   media_plex:
     external: true
