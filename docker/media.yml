@@ -170,4 +170,5 @@ volumes:
   plex:
   deluge:
   radarr:
+  sonarr:
   jackett:
