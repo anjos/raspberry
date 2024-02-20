@@ -59,7 +59,7 @@ services:
       timeout: 2s
     volumes:
       - "deluge:/config"
-      - "/media/downloads:/downloads"
+      - "/media/downloads:/media/downloads"
     environment:
       - "DELUGE_LOGLEVEL=error"
       - "TZ=${TZ}"
