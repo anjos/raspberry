@@ -14,6 +14,7 @@ services:
       - media_deluge:/data/media_deluge
       - media_plex:/data/media_plex
       - media_radarr:/data/media_radarr
+      - media_sonarr:/data/media_sonarr
       - media_jackett:/data/media_jackett
       - monitor_diun:/data/monitor_diun
       - portainer:/data/portainer
@@ -34,6 +35,8 @@ volumes:
   media_plex:
     external: true
   media_radarr:
+    external: true
+  media_sonarr:
     external: true
   media_jackett:
     external: true
