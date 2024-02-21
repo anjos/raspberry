@@ -115,6 +115,29 @@ services:
       - /media:/media
 
   # Centralized indexer
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
+    restart: unless-stopped
+    hostname: prowlarr
+    networks:
+      - network
+    ports:
+      - 9696:9696
+    healthcheck:
+      test: curl --fail localhost:9696 || exit 1
+      interval: 60s
+      retries: 5
+      start_period: 30s
+      timeout: 2s
+    environment:
+      - "TZ=${TZ}"
+      - "PUID=${PUID}"
+      - "PGID=${PGID}"
+    volumes:
+      - "prowlarr:/config"
+
+  # Another centralized indexer
   jackett:
     image: lscr.io/linuxserver/jackett:latest
     container_name: jackett
@@ -138,27 +161,27 @@ services:
       - "jackett:/config"
       - /media/downloads:/downloads
 
-  # Not working as 20.02.2024
-  # flaresolverr:
-  #   image: ghcr.io/flaresolverr/flaresolverr:latest
-  #   container_name: flaresolverr
-  #   restart: unless-stopped
-  #   hostname: flaresolverr
-  #   networks:
-  #     - network
-  #   ports:
-  #     - 8191:8191
-  #   healthcheck:
-  #     test: curl --fail localhost:8191 || exit 1
-  #     interval: 60s
-  #     retries: 5
-  #     start_period: 30s
-  #     timeout: 2s
-  #   environment:
-  #     - "TZ=${TZ}"
-  #     - "LOG_LEVEL=info"
-  #     - "LOG_HTML=false"
-  #     - "CAPTCHA_SOLVER=none"
+  # Captcha solver for cloudfare human controls
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    container_name: flaresolverr
+    restart: unless-stopped
+    hostname: flaresolverr
+    networks:
+      - network
+    ports:
+      - 8191:8191
+    healthcheck:
+      test: curl --fail localhost:8191 || exit 1
+      interval: 60s
+      retries: 5
+      start_period: 30s
+      timeout: 2s
+    environment:
+      - "TZ=${TZ}"
+      - "LOG_LEVEL=info"
+      - "LOG_HTML=false"
+      - "CAPTCHA_SOLVER=none"
 
 # Networks for media services - allow services to be recognized by name
 networks:
