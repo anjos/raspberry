@@ -194,4 +194,5 @@ volumes:
   deluge:
   radarr:
   sonarr:
+  prowlarr:
   jackett:
