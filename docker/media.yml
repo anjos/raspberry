@@ -137,30 +137,6 @@ services:
     volumes:
       - "prowlarr:/config"
 
-  # Another centralized indexer
-  jackett:
-    image: lscr.io/linuxserver/jackett:latest
-    container_name: jackett
-    restart: unless-stopped
-    hostname: jackett
-    networks:
-      - network
-    ports:
-      - 9117:9117
-    healthcheck:
-      test: curl --fail localhost:9117 || exit 1
-      interval: 60s
-      retries: 5
-      start_period: 30s
-      timeout: 2s
-    environment:
-      - "TZ=${TZ}"
-      - "PUID=${PUID}"
-      - "PGID=${PGID}"
-    volumes:
-      - "jackett:/config"
-      - /media/downloads:/downloads
-
   # Captcha solver for cloudfare human controls
   flaresolverr:
     image: ghcr.io/flaresolverr/flaresolverr:latest
@@ -195,4 +171,3 @@ volumes:
   radarr:
   sonarr:
   prowlarr:
-  jackett:
