@@ -2,19 +2,14 @@ Entrance:
     "Off":
         Entrance Ceiling light 1:
           state: "OFF"
-          brightness: 0
         Entrance Ceiling light 2:
           state: "OFF"
-          brightness: 0
         Entrance Console light 1:
           state: "OFF"
-          brightness: 0
         Entrance Console light 2:
           state: "OFF"
-          brightness: 0
         Entrance Photo frame plug:
           state: "OFF"
-          brightness: 0
     "On":
         Entrance Ceiling light 1:
           state: "ON"
@@ -37,10 +32,8 @@ Entrance:
     "Bright":
         Entrance Ceiling light 1:
           state: "OFF"
-          brightness: 0
         Entrance Ceiling light 2:
           state: "OFF"
-          brightness: 0
         Entrance Console light 1:
           state: "ON"
           brightness: 254
@@ -54,10 +47,8 @@ Entrance:
     "Cozy":
         Entrance Ceiling light 1:
           state: "OFF"
-          brightness: 0
         Entrance Ceiling light 2:
           state: "OFF"
-          brightness: 0
         Entrance Console light 1:
           state: "ON"
           brightness: 155
