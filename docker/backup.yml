@@ -16,7 +16,6 @@ services:
       - media_radarr:/data/media_radarr
       - media_sonarr:/data/media_sonarr
       - media_prowlarr:/data/media_prowlarr
-      - media_jackett:/data/media_jackett
       - monitor_diun:/data/monitor_diun
       - portainer:/data/portainer
       - smarthome_mosquitto_data:/data/smarthome_mosquitto_data
@@ -40,8 +39,6 @@ volumes:
   media_sonarr:
     external: true
   media_prowlarr:
-    external: true
-  media_jackett:
     external: true
   monitor_diun:
     external: true
