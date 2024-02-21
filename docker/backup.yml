@@ -5,7 +5,7 @@ services:
   rsnapshot:
     image: lscr.io/linuxserver/rsnapshot:latest
     container_name: rsnapshot
-    restart: always
+    restart: unless-stopped
     network_mode: bridge
     hostname: raspberry
     volumes:
