@@ -116,7 +116,8 @@ services:
 
   # Centralized indexer
   prowlarr:
-    image: lscr.io/linuxserver/prowlarr:latest
+    #image: lscr.io/linuxserver/prowlarr:latest
+    image: lscr.io/linuxserver/prowlarr:1.12.2
     container_name: prowlarr
     restart: unless-stopped
     hostname: prowlarr
