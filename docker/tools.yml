@@ -6,7 +6,7 @@ services:
     image: pihole/pihole:latest
     container_name: pihole
     restart: unless-stopped
-    hostname: raspberry
+    hostname: pihole
     ports:
       - "53:53/tcp"
       - "53:53/udp"
