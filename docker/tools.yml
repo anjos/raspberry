@@ -23,7 +23,7 @@ services:
       - NET_ADMIN # Required if you are using Pi-hole as your DHCP server, else not needed
     networks:
       network:
-        ipv4_address: "192.168.1.200"
+        ipv4_address: "192.168.1.254"
 
 # Networks for pihole - use a macvlan to get a new IP address,
 # independently of the raspberry pi
