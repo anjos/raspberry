@@ -22,7 +22,6 @@ services:
       - smarthome_mosquitto_log:/data/smarthome_mosquitto_log
       - smarthome_zigbee2mqtt:/data/smarthome_zigbee2mqtt
       - smarthome_homebridge:/data/smarthome_homebridge
-      - tools_pihole_etc:/data/tools_pihole_etc
     environment:
       - "TZ=${TZ}"
       - "PUID=${PUID}"
@@ -52,6 +51,4 @@ volumes:
   smarthome_zigbee2mqtt:
     external: true
   smarthome_homebridge:
-    external: true
-  tools_pihole_etc:
     external: true
