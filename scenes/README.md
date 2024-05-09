@@ -6,7 +6,10 @@ To use it, install [pixi](https://pixi.sh) and then run:
 
 ```sh
 $ pixi install
+# resets scenes for the particular room
 $ pixi run reset office.yml  # run directly on the server!
+# starts a container with access to z2m configuration on /data
+$ pixi run config
 ```
 
 > Note: If you find issues resetting scenes with many Ikea lights (like in the

@@ -13,3 +13,4 @@ paho-mqtt = "*"
 
 [tasks]
 reset = "python ./reset.py"
+config = "docker run --rm -it -v smarthome_zigbee2mqtt:/data busybox /bin/sh"
