@@ -10,6 +10,7 @@ python = "~=3.12.0"
 universal-silabs-flasher = "*"
 
 [tasks]
-flash = "universal-silabs-flasher --device /dev/ttyACM0 flash --allow-cross-flashing --firmware"
+flasher = "universal-silabs-flasher --device /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20231101144759-if00"
+probe = "universal-silabs-flasher --device /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20231101144759-if00 probe"
 flash-vendor = "universal-silabs-flasher --device /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20231101144759-if00 flash --firmware ./ncp-uart-sw_EZNet6.10.3_V1.0.1.gbl"
-flash-silabs = "universal-silabs-flasher --device /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20231101144759-if00 flash --allow-cross-flashing --firmware ./ncp-uart-hw-v7.4.2.0-zbdonglee-230400.gbl"
+flash-silabs = "universal-silabs-flasher --device /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20231101144759-if00 flash --allow-cross-flashing --firmware ./ncp-uart-hw-v7.4.2.0-zbdonglee-115200.gbl"
