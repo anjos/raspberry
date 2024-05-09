@@ -1,0 +1,15 @@
+[project]
+name = "scenes"
+platforms = ["linux-aarch64", "osx-arm64"]
+channels = ["conda-forge"]
+
+[dependencies]
+python = "~=3.12.0"
+pyyaml = "*"
+pdbpp = "*"
+
+[pypi-dependencies]
+paho-mqtt = "*"
+
+[tasks]
+reset = "python ./reset.py"
