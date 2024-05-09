@@ -42,7 +42,7 @@ services:
       - "/dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20231101144759-if00:/dev/ttyACM0"
     depends_on:
       mosquitto:
-        condition: service_healthy
+        condition: service_started
     healthcheck:
       test: wget --spider localhost:8080 || exit 1
       interval: 30s
@@ -64,7 +64,7 @@ services:
       - "homebridge:/homebridge"
     depends_on:
       zigbee2mqtt:
-        condition: service_healthy
+        condition: service_started
     healthcheck:
       test: curl --fail localhost:8581 || exit 1
       interval: 30s
