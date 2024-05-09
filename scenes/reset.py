@@ -85,7 +85,6 @@ def store_scene(
 
 
 def main():
-
     logging.basicConfig(
         level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
     )
@@ -149,13 +148,13 @@ def main():
         logging.info(f"Parsing scenes for `{room}`...")
         for id, (scene, commands) in enumerate(scenes.items()):
             if (args.only_scene is not None) and (scene != args.only_scene):
-                logging.info(f"Skipping scene `{scene}` (id: {id}) for `{room}`...")
+                logging.info(f"Skipping scene `{scene}` (id: {id+1}) for `{room}`...")
                 continue
-            logging.info(f"Setting up scene `{scene}` (id: {id}) at `{room}`...")
-            remove_scene(client, room, id)
+            logging.info(f"Setting up scene `{scene}` (id: {id+1}) at `{room}`...")
+            remove_scene(client, room, id + 1)
             setup_scene(client, commands)
             time.sleep(args.wait)
-            store_scene(client, room, id, scene, group_id, commands)
+            store_scene(client, room, id + 1, scene, group_id, commands)
             time.sleep(args.wait)
 
 
