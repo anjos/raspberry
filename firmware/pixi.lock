@@ -9,20 +9,20 @@ environments:
       linux-aarch64:
       - conda: https://conda.anaconda.org/conda-forge/linux-aarch64/_openmp_mutex-4.5-2_gnu.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/linux-aarch64/bzip2-1.0.8-h31becfc_5.conda
-      - conda: https://conda.anaconda.org/conda-forge/linux-aarch64/ca-certificates-2024.2.2-hcefe29a_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/linux-aarch64/ld_impl_linux-aarch64-2.40-hba4e955_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-aarch64/ca-certificates-2024.6.2-hcefe29a_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-aarch64/ld_impl_linux-aarch64-2.40-h9fc2d93_7.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-aarch64/libexpat-2.6.2-h2f0025b_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-aarch64/libffi-3.4.2-h3557bc0_5.tar.bz2
-      - conda: https://conda.anaconda.org/conda-forge/linux-aarch64/libgcc-ng-13.2.0-he277a41_7.conda
-      - conda: https://conda.anaconda.org/conda-forge/linux-aarch64/libgomp-13.2.0-he277a41_7.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-aarch64/libgcc-ng-13.2.0-he277a41_11.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-aarch64/libgomp-13.2.0-he277a41_11.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-aarch64/libnsl-2.0.1-h31becfc_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/linux-aarch64/libsqlite-3.45.3-h194ca79_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-aarch64/libsqlite-3.46.0-hf51ef55_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-aarch64/libuuid-2.38.1-hb4cce97_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-aarch64/libxcrypt-4.4.36-h31becfc_1.conda
-      - conda: https://conda.anaconda.org/conda-forge/linux-aarch64/libzlib-1.2.13-h31becfc_5.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-aarch64/libzlib-1.3.1-h68df207_1.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-aarch64/ncurses-6.5-h0425590_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/linux-aarch64/openssl-3.3.0-h31becfc_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/linux-aarch64/python-3.12.3-h43d1f9e_0_cpython.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-aarch64/openssl-3.3.1-h68df207_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-aarch64/python-3.12.4-h829453d_0_cpython.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-aarch64/readline-8.2-h8fc344f_1.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-aarch64/tk-8.6.13-h194ca79_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/tzdata-2024a-h0c530f3_0.conda
@@ -32,14 +32,14 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/00/c4/c93eb22025a2de6b83263dfe3d7df2e19138e345bca6f18dba7394120930/aiosqlite-0.20.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/a7/fa/e01228c2938de91d47b307831c62ab9e4001e747789d0b05baf779a6488c/async_timeout-4.0.3-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/e0/44/827b2a91a5816512fcaf3cc4ebc465ccd5d598c45cefa6703fcf4a79018f/attrs-23.2.0-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/b9/01/f16256868168e717a9decbbdaaffa5997923c142ced4a85678f3c080e969/bellows-0.38.4-py3-none-any.whl
+      - pypi: https://files.pythonhosted.org/packages/be/c8/3e0fd6cd5c26f4d20d6946e10c13f8e74eade60ec8775ce769d745d0fa83/bellows-0.39.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/e4/c7/c09cc6fd1828ea950e60d44e0ef5ed0b7e3396fbfb856e49ca7d629b1408/cffi-1.16.0-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl
       - pypi: https://files.pythonhosted.org/packages/00/2e/d53fa4befbf2cfa713304affc7ca780ce4fc1fd8710527771b58311a3229/click-8.1.7-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/ae/5a/4f025bc751087833686892e17e7564828e409c43b632878afeae554870cd/click_log-0.4.0-py2.py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/a7/06/3d6badcf13db419e25b07041d9c7b4a2c331d3f4e7134445ec5df57714cd/coloredlogs-15.0.1-py2.py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/7d/4d/fc70b599df02a4baa2024564e474e3e9bec4075a6cd869e4983aff5d179a/crc-7.0.0-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/f4/2f/93f71642e177f0a1d1f392421e314056a2635ca3524b3c57b005cdd995bd/crccheck-1.3.0-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/80/91/762c76c55db47cb94e1ba91ec6734a4f1e64466cbef5ef8cd63c5ab4f31c/cryptography-42.0.7-cp39-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl
+      - pypi: https://files.pythonhosted.org/packages/43/c2/4a3eef67e009a522711ebd8ac89424c3a7fe591ece7035d964419ad52a1d/cryptography-42.0.8-cp39-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl
       - pypi: https://files.pythonhosted.org/packages/a9/b8/438cfd92be2a124da8259b13409224d9b19ef8f5a5b2507174fc7e7ea18f/frozenlist-1.4.1-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl
       - pypi: https://files.pythonhosted.org/packages/15/04/a89e22b48d88f1f8ba5ae69ba93e71ceb3be69c68368835399d97d21d40b/gpiod-1.5.4-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/f0/0f/310fb31e39e2d734ccaa2c0fb981ee41f7bd5056ce9bc29b2248bd569169/humanfriendly-10.0-py2.py3-none-any.whl
@@ -53,12 +53,12 @@ environments:
       - pypi: https://files.pythonhosted.org/packages/27/24/c820cf15f87f7b164e83710c1852d4f900d9793961579e5ef64189bc0c10/pyserial_asyncio-0.6-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/b7/59/2056f61236782a2c86b33906c025d4f4a0b17be0161b63b70fd9e8775d36/referencing-0.35.1-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/19/38/eb7ae2b3ca5001b74536a67555e65202bedd1302f3d5d5000f7b0dc67ba6/rpds_py-0.18.1-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl
-      - pypi: https://files.pythonhosted.org/packages/f7/29/13965af254e3373bceae8fb9a0e6ea0d0e571171b80d6646932131d6439b/setuptools-69.5.1-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/01/f3/936e209267d6ef7510322191003885de524fc48d1b43269810cd589ceaf5/typing_extensions-4.11.0-py3-none-any.whl
-      - pypi: https://files.pythonhosted.org/packages/ba/22/deaea1b14e6dfccabfa2f04046027ff18ba247fb1b4dcefd9717cd0289c2/universal_silabs_flasher-0.0.19-py3-none-any.whl
+      - pypi: https://files.pythonhosted.org/packages/55/b3/b3a3415d2debd837106ed417f8681d8af63037fed367fa1b85dbfef081f1/setuptools-70.1.0-py3-none-any.whl
+      - pypi: https://files.pythonhosted.org/packages/26/9f/ad63fc0248c5379346306f8668cda6e2e2e9c95e01216d2b8ffd9ff037d0/typing_extensions-4.12.2-py3-none-any.whl
+      - pypi: https://files.pythonhosted.org/packages/78/43/5b645f88ea8e6e8d7f7a2790d557ea706aa281242101b1cccd38bb500dfa/universal_silabs_flasher-0.0.20-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/3e/21/0424844b889dccd8f1899f92f239d6eca5f4995f5c86baff094694140828/voluptuous-0.14.2-py3-none-any.whl
       - pypi: https://files.pythonhosted.org/packages/ea/45/65801be625ef939acc8b714cf86d4a198c0646e80dc8970359d080c47204/yarl-1.9.4-cp312-cp312-manylinux_2_17_aarch64.manylinux2014_aarch64.whl
-      - pypi: https://files.pythonhosted.org/packages/e3/e0/a257f39217951404708f8952858508c5146c2fc98c9cbeef169e1b1fe916/zigpy-0.64.0-py3-none-any.whl
+      - pypi: https://files.pythonhosted.org/packages/d9/bb/49a0de5064e19fe58aaca3b3af04531937b5bfe98ad59cf9711aefd8fb1a/zigpy-0.64.1-py3-none-any.whl
 packages:
 - kind: conda
   name: _openmp_mutex
@@ -75,6 +75,7 @@ packages:
   - openmp_impl 9999
   license: BSD-3-Clause
   license_family: BSD
+  purls: []
   size: 23712
   timestamp: 1650670790230
 - kind: pypi
@@ -159,9 +160,9 @@ packages:
   requires_python: '>=3.7'
 - kind: pypi
   name: bellows
-  version: 0.38.4
-  url: https://files.pythonhosted.org/packages/b9/01/f16256868168e717a9decbbdaaffa5997923c142ced4a85678f3c080e969/bellows-0.38.4-py3-none-any.whl
-  sha256: 0ca30adc280d66b71116eebff16fa289dcf4d730c147fa46ef9c660ce8e78220
+  version: 0.39.1
+  url: https://files.pythonhosted.org/packages/be/c8/3e0fd6cd5c26f4d20d6946e10c13f8e74eade60ec8775ce769d745d0fa83/bellows-0.39.1-py3-none-any.whl
+  sha256: 8cd9bd8a0d58dc9196c29e2e907ed468c66194dc8ff0d2e1dddf2eb19586fe38
   requires_dist:
   - click
   - click-log>=0.2.1
@@ -188,19 +189,21 @@ packages:
   - libgcc-ng >=12
   license: bzip2-1.0.6
   license_family: BSD
+  purls: []
   size: 189668
   timestamp: 1699280060686
 - kind: conda
   name: ca-certificates
-  version: 2024.2.2
+  version: 2024.6.2
   build: hcefe29a_0
   subdir: linux-aarch64
-  url: https://conda.anaconda.org/conda-forge/linux-aarch64/ca-certificates-2024.2.2-hcefe29a_0.conda
-  sha256: 0f6b34d835e26e5fa97cca4985dc46f0aba551a3a23f07c6f13cca2542b8c642
-  md5: 57c226edb90c4e973b9b7503537dd339
+  url: https://conda.anaconda.org/conda-forge/linux-aarch64/ca-certificates-2024.6.2-hcefe29a_0.conda
+  sha256: d27b90ff1e00c34123c37a4c5332bb75c3c5cc6775c57ecfa9f430b629ad3108
+  md5: 3ef6b1a30375f8a973a593698e317191
   license: ISC
-  size: 155738
-  timestamp: 1706845723412
+  purls: []
+  size: 156128
+  timestamp: 1717312862469
 - kind: pypi
   name: cffi
   version: 1.16.0
@@ -247,9 +250,9 @@ packages:
   sha256: 278ec53d6f417f197f7e0e29b485093d4879b0bc7a2d29b657ef8242e633b48d
 - kind: pypi
   name: cryptography
-  version: 42.0.7
-  url: https://files.pythonhosted.org/packages/80/91/762c76c55db47cb94e1ba91ec6734a4f1e64466cbef5ef8cd63c5ab4f31c/cryptography-42.0.7-cp39-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl
-  sha256: 779245e13b9a6638df14641d029add5dc17edbef6ec915688f3acb9e720a5858
+  version: 42.0.8
+  url: https://files.pythonhosted.org/packages/43/c2/4a3eef67e009a522711ebd8ac89424c3a7fe591ece7035d964419ad52a1d/cryptography-42.0.8-cp39-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl
+  sha256: c4783183f7cb757b73b2ae9aed6599b96338eb957233c58ca8f49a49cc32fd5e
   requires_dist:
   - cffi>=1.12 ; platform_python_implementation != 'PyPy'
   - sphinx>=5.3.0 ; extra == 'docs'
@@ -340,17 +343,19 @@ packages:
 - kind: conda
   name: ld_impl_linux-aarch64
   version: '2.40'
-  build: hba4e955_0
+  build: h9fc2d93_7
+  build_number: 7
   subdir: linux-aarch64
-  url: https://conda.anaconda.org/conda-forge/linux-aarch64/ld_impl_linux-aarch64-2.40-hba4e955_0.conda
-  sha256: a306f9368b490b5fd926abf42d9a796e1725cbc7c3e631fc404f80a2bf7d1388
-  md5: b55c1cb33c63d23b542fa53f24541e56
+  url: https://conda.anaconda.org/conda-forge/linux-aarch64/ld_impl_linux-aarch64-2.40-h9fc2d93_7.conda
+  sha256: 4a6c0bd77e125da8472bd73bba7cd4169a3ce4699b00a3893026ae8664b2387d
+  md5: 1b0feef706f4d03eff0b76626ead64fc
   constrains:
   - binutils_impl_linux-aarch64 2.40
   license: GPL-3.0-only
   license_family: GPL
-  size: 735254
-  timestamp: 1713651051970
+  purls: []
+  size: 735885
+  timestamp: 1718625653417
 - kind: conda
   name: libexpat
   version: 2.6.2
@@ -365,6 +370,7 @@ packages:
   - expat 2.6.2.*
   license: MIT
   license_family: MIT
+  purls: []
   size: 72544
   timestamp: 1710362309065
 - kind: conda
@@ -380,36 +386,41 @@ packages:
   - libgcc-ng >=9.4.0
   license: MIT
   license_family: MIT
+  purls: []
   size: 59450
   timestamp: 1636488255090
 - kind: conda
   name: libgcc-ng
   version: 13.2.0
-  build: he277a41_7
-  build_number: 7
+  build: he277a41_11
+  build_number: 11
   subdir: linux-aarch64
-  url: https://conda.anaconda.org/conda-forge/linux-aarch64/libgcc-ng-13.2.0-he277a41_7.conda
-  sha256: ef2f338b3342b51700e6cda10831d27bb2983fe64d7e75e30e9ffb7f9cf76571
-  md5: 01c5b27ce46f50abab2dc8454842c792
+  url: https://conda.anaconda.org/conda-forge/linux-aarch64/libgcc-ng-13.2.0-he277a41_11.conda
+  sha256: f778e5eef567b8739c623df84062a68706dc0ead589a870b5cd305183c28112f
+  md5: 2095a7824434b4fa23420b8193974521
   depends:
   - _openmp_mutex >=4.5
   constrains:
-  - libgomp 13.2.0 he277a41_7
+  - libgomp 13.2.0 he277a41_11
   license: GPL-3.0-only WITH GCC-exception-3.1
-  size: 458977
-  timestamp: 1715017703433
+  license_family: GPL
+  purls: []
+  size: 487809
+  timestamp: 1718867375859
 - kind: conda
   name: libgomp
   version: 13.2.0
-  build: he277a41_7
-  build_number: 7
+  build: he277a41_11
+  build_number: 11
   subdir: linux-aarch64
-  url: https://conda.anaconda.org/conda-forge/linux-aarch64/libgomp-13.2.0-he277a41_7.conda
-  sha256: bb3bc7e03f1add861884d8bad79b359ad991025570625e1f979964e82f1f8d9e
-  md5: 1d1691ec9e5be799f86310fa38f00b9f
+  url: https://conda.anaconda.org/conda-forge/linux-aarch64/libgomp-13.2.0-he277a41_11.conda
+  sha256: a674580c43df173058bbaf6039a18334de6c4a102687b6824a1cc017160448c8
+  md5: 3d7d29223d3ec3bd863410b8ec479788
   license: GPL-3.0-only WITH GCC-exception-3.1
-  size: 424004
-  timestamp: 1715017599237
+  license_family: GPL
+  purls: []
+  size: 447720
+  timestamp: 1718867291697
 - kind: conda
   name: libnsl
   version: 2.0.1
@@ -422,22 +433,24 @@ packages:
   - libgcc-ng >=12
   license: LGPL-2.1-only
   license_family: GPL
+  purls: []
   size: 34501
   timestamp: 1697358973269
 - kind: conda
   name: libsqlite
-  version: 3.45.3
-  build: h194ca79_0
+  version: 3.46.0
+  build: hf51ef55_0
   subdir: linux-aarch64
-  url: https://conda.anaconda.org/conda-forge/linux-aarch64/libsqlite-3.45.3-h194ca79_0.conda
-  sha256: be87d8b67bdf892665c709d82c48011991fbf2fa15c19b006379b03ed494b070
-  md5: fb35b8afbe9e92467ac7b5608d60b775
+  url: https://conda.anaconda.org/conda-forge/linux-aarch64/libsqlite-3.46.0-hf51ef55_0.conda
+  sha256: 7b48d006be6cd089105687fb524a2c93c4218bfc398d0611340cafec55249977
+  md5: a8ae63fd6fb7d007f74ef3df95e5edf3
   depends:
   - libgcc-ng >=12
-  - libzlib >=1.2.13,<1.3.0a0
+  - libzlib >=1.2.13,<2.0a0
   license: Unlicense
-  size: 1036705
-  timestamp: 1713367400740
+  purls: []
+  size: 1043861
+  timestamp: 1718050586624
 - kind: conda
   name: libuuid
   version: 2.38.1
@@ -450,6 +463,7 @@ packages:
   - libgcc-ng >=12
   license: BSD-3-Clause
   license_family: BSD
+  purls: []
   size: 35720
   timestamp: 1680113474501
 - kind: conda
@@ -464,25 +478,27 @@ packages:
   depends:
   - libgcc-ng >=12
   license: LGPL-2.1-or-later
+  purls: []
   size: 114269
   timestamp: 1702724369203
 - kind: conda
   name: libzlib
-  version: 1.2.13
-  build: h31becfc_5
-  build_number: 5
+  version: 1.3.1
+  build: h68df207_1
+  build_number: 1
   subdir: linux-aarch64
-  url: https://conda.anaconda.org/conda-forge/linux-aarch64/libzlib-1.2.13-h31becfc_5.conda
-  sha256: aeeefbb61e5e8227e53566d5e42dbb49e120eb99109996bf0dbfde8f180747a7
-  md5: b213aa87eea9491ef7b129179322e955
+  url: https://conda.anaconda.org/conda-forge/linux-aarch64/libzlib-1.3.1-h68df207_1.conda
+  sha256: 0d6dfd1e36e10c205ff1fdcf42d42289ff0f50be7a4eaa7b34f086a5e22a0734
+  md5: b13fb82f88902e34dd0638cd7d378c21
   depends:
   - libgcc-ng >=12
   constrains:
-  - zlib 1.2.13 *_5
+  - zlib 1.3.1 *_1
   license: Zlib
   license_family: Other
-  size: 67036
-  timestamp: 1686575148440
+  purls: []
+  size: 67199
+  timestamp: 1716874136348
 - kind: pypi
   name: multidict
   version: 6.0.5
@@ -500,16 +516,17 @@ packages:
   depends:
   - libgcc-ng >=12
   license: X11 AND BSD-3-Clause
+  purls: []
   size: 925099
   timestamp: 1715194843316
 - kind: conda
   name: openssl
-  version: 3.3.0
-  build: h31becfc_0
+  version: 3.3.1
+  build: h68df207_0
   subdir: linux-aarch64
-  url: https://conda.anaconda.org/conda-forge/linux-aarch64/openssl-3.3.0-h31becfc_0.conda
-  sha256: 5aee0fc6e07ec60e01023a8d3e034773534bfd1df1a8dd83f446da03ae98b333
-  md5: 36ca60a3afaf2ea2c460daeebd67430e
+  url: https://conda.anaconda.org/conda-forge/linux-aarch64/openssl-3.3.1-h68df207_0.conda
+  sha256: 1688bf43c6ea6322ac7c1ca455712e5b64f6f524fee4c108b26c26ed7eac6f11
+  md5: dc4bb65a3f9c97b26c8f947662eea202
   depends:
   - ca-certificates
   - libgcc-ng >=12
@@ -517,8 +534,9 @@ packages:
   - pyopenssl >=22.1
   license: Apache-2.0
   license_family: Apache
-  size: 3423479
-  timestamp: 1714465928572
+  purls: []
+  size: 3427371
+  timestamp: 1717546156492
 - kind: pypi
   name: pure-pcapy3
   version: 1.0.1
@@ -548,12 +566,12 @@ packages:
   - pyserial
 - kind: conda
   name: python
-  version: 3.12.3
-  build: h43d1f9e_0_cpython
+  version: 3.12.4
+  build: h829453d_0_cpython
   subdir: linux-aarch64
-  url: https://conda.anaconda.org/conda-forge/linux-aarch64/python-3.12.3-h43d1f9e_0_cpython.conda
-  sha256: e186f3ee570464241c844adff6a3ba8f395cef15c5d46c0a8f784cfd97b3bdca
-  md5: dc93ad1d2ba17ebc948bf5434ffa864b
+  url: https://conda.anaconda.org/conda-forge/linux-aarch64/python-3.12.4-h829453d_0_cpython.conda
+  sha256: 21a308f92f6988e1a8169a8d46b43fbd1a6b638d0964d015a4444d7af05f00e1
+  md5: 48c28e5926b7c8ffe58f77991a43ca23
   depends:
   - bzip2 >=1.0.8,<2.0a0
   - ld_impl_linux-aarch64 >=2.36.1
@@ -561,12 +579,12 @@ packages:
   - libffi >=3.4,<4.0a0
   - libgcc-ng >=12
   - libnsl >=2.0.1,<2.1.0a0
-  - libsqlite >=3.45.2,<4.0a0
+  - libsqlite >=3.46.0,<4.0a0
   - libuuid >=2.38.1,<3.0a0
   - libxcrypt >=4.4.36
-  - libzlib >=1.2.13,<1.3.0a0
-  - ncurses >=6.4.20240210,<7.0a0
-  - openssl >=3.2.1,<4.0a0
+  - libzlib >=1.3.1,<2.0a0
+  - ncurses >=6.5,<7.0a0
+  - openssl >=3.3.1,<4.0a0
   - readline >=8.2,<9.0a0
   - tk >=8.6.13,<8.7.0a0
   - tzdata
@@ -574,8 +592,9 @@ packages:
   constrains:
   - python_abi 3.12.* *_cp312
   license: Python-2.0
-  size: 14051797
-  timestamp: 1713205211165
+  purls: []
+  size: 12642375
+  timestamp: 1718618670784
 - kind: conda
   name: readline
   version: '8.2'
@@ -590,6 +609,7 @@ packages:
   - ncurses >=6.3,<7.0a0
   license: GPL-3.0-only
   license_family: GPL
+  purls: []
   size: 294092
   timestamp: 1679532238805
 - kind: pypi
@@ -609,9 +629,9 @@ packages:
   requires_python: '>=3.8'
 - kind: pypi
   name: setuptools
-  version: 69.5.1
-  url: https://files.pythonhosted.org/packages/f7/29/13965af254e3373bceae8fb9a0e6ea0d0e571171b80d6646932131d6439b/setuptools-69.5.1-py3-none-any.whl
-  sha256: c636ac361bc47580504644275c9ad802c50415c7522212252c033bd15f301f32
+  version: 70.1.0
+  url: https://files.pythonhosted.org/packages/55/b3/b3a3415d2debd837106ed417f8681d8af63037fed367fa1b85dbfef081f1/setuptools-70.1.0-py3-none-any.whl
+  sha256: d9b8b771455a97c8a9f3ab3448ebe0b29b5e105f1228bba41028be116985a267
   requires_dist:
   - sphinx>=3.5 ; extra == 'docs'
   - jaraco-packaging>=9.3 ; extra == 'docs'
@@ -625,6 +645,7 @@ packages:
   - sphinx-reredirects ; extra == 'docs'
   - sphinxcontrib-towncrier ; extra == 'docs'
   - sphinx-notfound-page<2,>=1 ; extra == 'docs'
+  - pyproject-hooks!=1.1 ; extra == 'docs'
   - pytest!=8.1.1,>=6 ; extra == 'testing'
   - pytest-checkdocs>=2.4 ; extra == 'testing'
   - pytest-mypy ; extra == 'testing'
@@ -636,29 +657,21 @@ packages:
   - jaraco-envs>=2.2 ; extra == 'testing'
   - pytest-xdist>=3 ; extra == 'testing'
   - jaraco-path>=3.2.0 ; extra == 'testing'
-  - build[virtualenv] ; extra == 'testing'
+  - build[virtualenv]>=1.0.3 ; extra == 'testing'
   - filelock>=3.4.0 ; extra == 'testing'
-  - ini2toml[lite]>=0.9 ; extra == 'testing'
+  - ini2toml[lite]>=0.14 ; extra == 'testing'
   - tomli-w>=1.0.0 ; extra == 'testing'
   - pytest-timeout ; extra == 'testing'
   - pytest-home>=0.5 ; extra == 'testing'
-  - mypy==1.9 ; extra == 'testing'
+  - mypy==1.10.0 ; extra == 'testing'
   - tomli ; extra == 'testing'
   - importlib-metadata ; extra == 'testing'
-  - pytest ; extra == 'testing-integration'
-  - pytest-xdist ; extra == 'testing-integration'
-  - pytest-enabler ; extra == 'testing-integration'
-  - virtualenv>=13.0.0 ; extra == 'testing-integration'
-  - tomli ; extra == 'testing-integration'
-  - wheel ; extra == 'testing-integration'
-  - jaraco-path>=3.2.0 ; extra == 'testing-integration'
-  - jaraco-envs>=2.2 ; extra == 'testing-integration'
-  - build[virtualenv]>=1.0.3 ; extra == 'testing-integration'
-  - filelock>=3.4.0 ; extra == 'testing-integration'
-  - packaging>=23.2 ; extra == 'testing-integration'
+  - pytest-subprocess ; extra == 'testing'
+  - pyproject-hooks!=1.1 ; extra == 'testing'
+  - jaraco-test ; extra == 'testing'
   - pytest-cov ; platform_python_implementation != 'PyPy' and extra == 'testing'
   - jaraco-develop>=7.21 ; (python_version >= '3.9' and sys_platform != 'cygwin') and extra == 'testing'
-  - pytest-ruff>=0.2.1 ; sys_platform != 'cygwin' and extra == 'testing'
+  - pytest-ruff>=0.3.2 ; sys_platform != 'cygwin' and extra == 'testing'
   - pytest-perf ; sys_platform != 'cygwin' and extra == 'testing'
   requires_python: '>=3.8'
 - kind: conda
@@ -671,16 +684,17 @@ packages:
   md5: f75105e0585851f818e0009dd1dde4dc
   depends:
   - libgcc-ng >=12
-  - libzlib >=1.2.13,<1.3.0a0
+  - libzlib >=1.2.13,<2.0.0a0
   license: TCL
   license_family: BSD
+  purls: []
   size: 3351802
   timestamp: 1695506242997
 - kind: pypi
   name: typing-extensions
-  version: 4.11.0
-  url: https://files.pythonhosted.org/packages/01/f3/936e209267d6ef7510322191003885de524fc48d1b43269810cd589ceaf5/typing_extensions-4.11.0-py3-none-any.whl
-  sha256: c1f94d72897edaf4ce775bb7558d5b79d8126906a14ea5ed1635921406c0387a
+  version: 4.12.2
+  url: https://files.pythonhosted.org/packages/26/9f/ad63fc0248c5379346306f8668cda6e2e2e9c95e01216d2b8ffd9ff037d0/typing_extensions-4.12.2-py3-none-any.whl
+  sha256: 04e5ca0351e0f3f85c6853954072df659d0d13fac324d0072316b67d7794700d
   requires_python: '>=3.8'
 - kind: conda
   name: tzdata
@@ -692,18 +706,19 @@ packages:
   sha256: 7b2b69c54ec62a243eb6fba2391b5e443421608c3ae5dbff938ad33ca8db5122
   md5: 161081fc7cec0bfda0d86d7cb595f8d8
   license: LicenseRef-Public-Domain
+  purls: []
   size: 119815
   timestamp: 1706886945727
 - kind: pypi
   name: universal-silabs-flasher
-  version: 0.0.19
-  url: https://files.pythonhosted.org/packages/ba/22/deaea1b14e6dfccabfa2f04046027ff18ba247fb1b4dcefd9717cd0289c2/universal_silabs_flasher-0.0.19-py3-none-any.whl
-  sha256: 29e5211a53ad79b9706244a4aec6084848ba4942ef9dad6dc1f4c1e7f043c151
+  version: 0.0.20
+  url: https://files.pythonhosted.org/packages/78/43/5b645f88ea8e6e8d7f7a2790d557ea706aa281242101b1cccd38bb500dfa/universal_silabs_flasher-0.0.20-py3-none-any.whl
+  sha256: bfd64c7bfebf5c67ef9b003f95db2379bfad554800a4c8f49ff0e5f5b58510be
   requires_dist:
   - click
   - zigpy
   - crc
-  - bellows~=0.38.0
+  - bellows~=0.39.0
   - coloredlogs
   - async-timeout
   - typing-extensions
@@ -732,6 +747,7 @@ packages:
   depends:
   - libgcc-ng >=12
   license: LGPL-2.1 and GPL-2.0
+  purls: []
   size: 440555
   timestamp: 1660348056328
 - kind: pypi
@@ -746,9 +762,9 @@ packages:
   requires_python: '>=3.7'
 - kind: pypi
   name: zigpy
-  version: 0.64.0
-  url: https://files.pythonhosted.org/packages/e3/e0/a257f39217951404708f8952858508c5146c2fc98c9cbeef169e1b1fe916/zigpy-0.64.0-py3-none-any.whl
-  sha256: 350123ba8dbabe2b1f2e2dae917776193f1ca5f2619ab3e6f82625422780fdb6
+  version: 0.64.1
+  url: https://files.pythonhosted.org/packages/d9/bb/49a0de5064e19fe58aaca3b3af04531937b5bfe98ad59cf9711aefd8fb1a/zigpy-0.64.1-py3-none-any.whl
+  sha256: a40d6a1cc456635609c5042092e77f04bec434480d222d3c904eda3c6944ede8
   requires_dist:
   - attrs
   - aiohttp
