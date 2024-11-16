@@ -1,7 +1,5 @@
 version: "3"
-
 services:
-
   # Plex Media Server (and web client)
   plex:
     image: lscr.io/linuxserver/plex:latest
@@ -26,18 +24,17 @@ services:
       start_period: 30s
       timeout: 2s
     volumes:
-      - "plex:/config"
-      - "/media:/data"
-      - "/media/tmp:/transcode"
+      - plex:/config
+      - /media:/data
+      - /media/tmp:/transcode
     environment:
-      - "VERSION=docker"
-      - "PLEX_CLAIM=${PLEX_CLAIM}"
-      - "TZ=${TZ}"
-      - "PUID=${PUID}"
-      - "PGID=${PGID}"
+      - VERSION=docker
+      - PLEX_CLAIM=${PLEX_CLAIM}
+      - TZ=${TZ}
+      - PUID=${PUID}
+      - PGID=${PGID}
     devices:
-      - "/dev/dri:/dev/dri"
-
+      - /dev/dri:/dev/dri
   # Bittorrent client
   deluge:
     image: lscr.io/linuxserver/deluge:latest
@@ -50,7 +47,7 @@ services:
       - 8112:8112
       - 6881:6881
       - 6881:6881/udp
-      - 58846:58846  #optional
+      - 58846:58846 #optional
     healthcheck:
       test: curl --fail localhost:8112 || exit 1
       interval: 60s
@@ -58,14 +55,13 @@ services:
       start_period: 30s
       timeout: 2s
     volumes:
-      - "deluge:/config"
-      - "/media/downloads:/media/downloads"
+      - deluge:/config
+      - /media/downloads:/media/downloads
     environment:
-      - "DELUGE_LOGLEVEL=error"
-      - "TZ=${TZ}"
-      - "PUID=${PUID}"
-      - "PGID=${PGID}"
-
+      - DELUGE_LOGLEVEL=${DELUGE_LOGLEVEL}
+      - TZ=${TZ}
+      - PUID=${PUID}
+      - PGID=${PGID}
   # Movie downloader/manager for usenet and torrent users.
   radarr:
     image: lscr.io/linuxserver/radarr:latest
@@ -83,13 +79,12 @@ services:
       start_period: 30s
       timeout: 2s
     environment:
-      - "TZ=${TZ}"
-      - "PUID=${PUID}"
-      - "PGID=${PGID}"
+      - TZ=${TZ}
+      - PUID=${PUID}
+      - PGID=${PGID}
     volumes:
-      - "radarr:/config"
+      - radarr:/config
       - /media:/media
-
   # TV show downloader/manager for usenet and torrent users.
   sonarr:
     image: lscr.io/linuxserver/sonarr:latest
@@ -107,13 +102,12 @@ services:
       start_period: 30s
       timeout: 2s
     environment:
-      - "TZ=${TZ}"
-      - "PUID=${PUID}"
-      - "PGID=${PGID}"
+      - TZ=${TZ}
+      - PUID=${PUID}
+      - PGID=${PGID}
     volumes:
-      - "sonarr:/config"
+      - sonarr:/config
       - /media:/media
-
   # Centralized indexer
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:latest
@@ -131,12 +125,11 @@ services:
       start_period: 30s
       timeout: 2s
     environment:
-      - "TZ=${TZ}"
-      - "PUID=${PUID}"
-      - "PGID=${PGID}"
+      - TZ=${TZ}
+      - PUID=${PUID}
+      - PGID=${PGID}
     volumes:
-      - "prowlarr:/config"
-
+      - prowlarr:/config
   # Captcha solver for cloudfare human controls
   flaresolverr:
     image: ghcr.io/flaresolverr/flaresolverr:latest
@@ -154,16 +147,14 @@ services:
       start_period: 30s
       timeout: 2s
     environment:
-      - "TZ=${TZ}"
-      - "LOG_LEVEL=info"
-      - "LOG_HTML=false"
-      - "CAPTCHA_SOLVER=none"
-
+      - TZ=${TZ}
+      - LOG_LEVEL=info
+      - LOG_HTML=false
+      - CAPTCHA_SOLVER=none
 # Networks for media services - allow services to be recognized by name
 networks:
   network:
     driver: bridge
-
 # Create volumes by visiting the "Volumes" tab on the left
 volumes:
   plex:
