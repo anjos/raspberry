@@ -1,9 +1,0 @@
-channels:
-  - conda-forge
-dependencies:
-  - python=3
-  - pip
-  - pyyaml
-  - pdbpp
-  - pip:
-    - paho-mqtt
