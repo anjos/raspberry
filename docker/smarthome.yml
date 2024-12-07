@@ -1,7 +1,4 @@
-version: "3"
-
 services:
-
   mosquitto:
     image: eclipse-mosquitto:latest
     container_name: mosquitto
@@ -13,19 +10,28 @@ services:
       - 1883:1883
       - 9001:9001
     volumes:
-      - "mosquitto_data:/mosquitto/data"
-      - "mosquitto_log:/mosquitto/log"
-    command: "mosquitto -c /mosquitto-no-auth.conf"
+      - mosquitto_data:/mosquitto/data
+      - mosquitto_log:/mosquitto/log
+    command: mosquitto -c /mosquitto-no-auth.conf
     healthcheck:
-      test: ["CMD", "mosquitto_sub", "-t", "$$SYS/#", "-C", "1", "-i", "healthcheck", "-W", "3"]
+      test:
+        - CMD
+        - mosquitto_sub
+        - -t
+        - $$SYS/#
+        - -C
+        - "1"
+        - -i
+        - healthcheck
+        - -W
+        - "3"
       interval: 30s
       timeout: 2s
       retries: 5
       start_period: 30s
       start_interval: 5s
     environment:
-      - "TZ=${TZ}"
-
+      - TZ=${TZ}
   zigbee2mqtt:
     image: koenkk/zigbee2mqtt:latest
     container_name: zigbee2mqtt
@@ -36,10 +42,10 @@ services:
     ports:
       - 8080:8080
     volumes:
-      - "zigbee2mqtt:/app/data"
-      - "/run/udev:/run/udev:ro"
+      - zigbee2mqtt:/app/data
+      - /run/udev:/run/udev:ro
     devices:
-      - "/dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20231101144759-if00:/dev/ttyACM0"
+      - /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20231101144759-if00:/dev/ttyACM0
     depends_on:
       mosquitto:
         condition: service_started
@@ -51,8 +57,7 @@ services:
       start_period: 30s
       start_interval: 5s
     environment:
-      - "TZ=${TZ}"
-
+      - TZ=${TZ}
   # Connection between zigbee server and Apple HomeKit
   homebridge:
     image: homebridge/homebridge:latest
@@ -61,7 +66,7 @@ services:
     hostname: raspberry
     network_mode: host
     volumes:
-      - "homebridge:/homebridge"
+      - homebridge:/homebridge
     depends_on:
       zigbee2mqtt:
         condition: service_started
@@ -75,16 +80,14 @@ services:
     logging:
       driver: json-file
       options:
-        max-size: "10m"
+        max-size: 10m
         max-file: "1"
     environment:
-      - "TZ=${TZ}"
-
+      - TZ=${TZ}
 # Networks for smarthome services - allow services to be recognized by name
 networks:
   network:
     driver: bridge
-
 volumes:
   mosquitto_data:
   mosquitto_log:

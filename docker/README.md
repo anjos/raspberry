@@ -1,23 +1,25 @@
 # Docker compose files for server deployment
 
-This repository contains docker-compose files for re-deploying the various
-services at your raspberry home server.
+This repository contains docker-compose files for re-deploying the various service
+stacks at your raspberry home server.
 
-Deploying should happen directly from the GitHub repository.  Choose "Stacks"
--> "Add stack", and then the "Repository" option for deployment.
+# Management
 
-> *Optionally* select "GitOps" updates for automatically triggering deployment
-> updates from GitHub changes.
+Start with:
 
-To complete the deployment, you will need secrets and the actual configuration
-files.  This is explained next.
+```sh
+./manage.sh help
+```
 
+## Environment variables
+
+Environment variables are configured at `.envrc`.  Fine-tune for adding or removing
+variables.
 
 ## Secrets
 
 Secrets can be found on your personal notes.  Just copy and paste the various
 secret files directly to the interface.
-
 
 ## Configuration files
 

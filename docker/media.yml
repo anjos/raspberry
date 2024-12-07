@@ -1,4 +1,3 @@
-version: "3"
 services:
   # Plex Media Server (and web client)
   plex:

@@ -1,7 +1,4 @@
-version: "3"
-
 services:
-
   rsnapshot:
     image: lscr.io/linuxserver/rsnapshot:latest
     container_name: rsnapshot
@@ -23,11 +20,9 @@ services:
       - smarthome_zigbee2mqtt:/data/smarthome_zigbee2mqtt
       - smarthome_homebridge:/data/smarthome_homebridge
     environment:
-      - "TZ=${TZ}"
-      - "PUID=${PUID}"
-      - "PGID=${PGID}"
-
-
+      - TZ=${TZ}
+      - PUID=${PUID}
+      - PGID=${PGID}
 volumes:
   rsnapshot:
   media_deluge:
