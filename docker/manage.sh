@@ -109,18 +109,28 @@ ps() {
     done
 }
 
+clean() {
+    docker -l info image prune --force
+}
+
 help() {
     echo "Usage: $(basename $0) <cmd> [<args>]"
     echo ""
     echo "Commands:"
     echo "  help                                - prints this help"
     echo "  ls                                  - list running stacks"
+    echo "  clean                               - remove all dangling images"
+    echo "  ps [<(yml|stack)>+]                 - lists running services in a stack"
     echo "  up [<(yml|stack)>+]                 - starts all stacks or those listed"
     echo "  down [<(yml|stack)>+]               - stops all stacks or those listed"
     echo "  pull [<(yml|stack)>+]               - updates latest images for stacks"
     echo "  update [<(yml|stack)>+]             - pulls and re-launch stacks"
     echo "  log <(yml|stack)> <image> [(opts)]  - shows log for a particular image"
     echo "  tail <(yml|stack)> <image> [(opts)] - tails log for a particular image"
+    echo ""
+    echo "Typical workflow:"
+    echo "$ ./manage.sh update"
+    echo "$ ./manage.sh clean"
 }
 
 if [[ $# -eq 0 ]]; then
