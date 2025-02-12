@@ -12,6 +12,7 @@ import typing
 import paho.mqtt.enums
 import paho.mqtt.publish
 import yaml
+from yamlcore import CoreLoader
 
 
 def parse_yaml_files(file_paths: list[str]):
@@ -22,7 +23,7 @@ def parse_yaml_files(file_paths: list[str]):
         try:
             with open(file_path, "r") as file:
                 # Load the YAML file and update the data dictionary
-                file_data = yaml.safe_load(file)
+                file_data = yaml.load(file, Loader=CoreLoader)
                 data.update(file_data)
 
         except Exception as e:
@@ -148,9 +149,9 @@ def main():
         logging.info(f"Parsing scenes for `{room}`...")
         for id, (scene, commands) in enumerate(scenes.items()):
             if (args.only_scene is not None) and (scene != args.only_scene):
-                logging.info(f"Skipping scene `{scene}` (id: {id+1}) for `{room}`...")
+                logging.info(f"Skipping scene `{scene}` (id: {id + 1}) for `{room}`...")
                 continue
-            logging.info(f"Setting up scene `{scene}` (id: {id+1}) at `{room}`...")
+            logging.info(f"Setting up scene `{scene}` (id: {id + 1}) at `{room}`...")
             remove_scene(client, room, id + 1)
             setup_scene(client, commands)
             time.sleep(args.wait)
