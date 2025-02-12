@@ -21,11 +21,25 @@ variables.
 Secrets can be found on your personal notes.  Just copy and paste the various
 secret files directly to the interface.
 
-## Configuration files
+## Modifying configuration files
 
 If you deploy the docker compose stacks available in this repository, volumes
 for each service will be automatically created for each service where
 applicable.
+
+To list all volumes:
+
+```sh
+docker volume list
+```
+
+To modify a configuration file within a docker volume run the following:
+
+```sh
+docker run --rm -it -v STACK_VOLUME:/data busybox /bin/sh
+```
+
+## Restoring configuration files
 
 To re-configure the various services, in case you need to deploy a fresh copy
 somehow, the easiest is to copy existing backup files with something like:
