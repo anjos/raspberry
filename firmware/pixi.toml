@@ -4,7 +4,7 @@ platforms = ["linux-aarch64"]
 channels = ["conda-forge"]
 
 [dependencies]
-python = "~=3.12.0"
+python = "3.*"
 
 [pypi-dependencies]
 universal-silabs-flasher = "*"
@@ -12,5 +12,7 @@ universal-silabs-flasher = "*"
 [tasks]
 flasher = "universal-silabs-flasher --device /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20231101144759-if00"
 probe = "universal-silabs-flasher --device /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20231101144759-if00 probe"
-flash-vendor = "universal-silabs-flasher --device /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20231101144759-if00 flash --firmware ./ncp-uart-sw_EZNet6.10.3_V1.0.1.gbl"
-flash-silabs = "universal-silabs-flasher --device /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20231101144759-if00 flash --allow-cross-flashing --firmware ./ncp-uart-hw-v7.4.5.0-zbdonglee-115200.gbl"
+flash-vendor-coordinator = "universal-silabs-flasher --device /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20231101144759-if00 flash --firmware ./ncp-uart-sw_EZNet6.10.3_V1.0.1.gbl"
+flash-vendor-router = "universal-silabs-flasher --device /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20231101144759-if00 flash --firmware ./Z3RouterUSBDonlge_EZNet6.10.3_V1.0.0.gbl"
+flash-nerivec-coordinator = "universal-silabs-flasher --device /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20231101144759-if00 flash --allow-cross-flashing --firmware ./sonoff_zbdonglee_zigbee_ncp_8.0.2.0_115200_sw_flow.gbl"
+flash-nerivec-router = "universal-silabs-flasher --device /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20231101144759-if00 flash --allow-cross-flashing --firmware ./sonoff_zbdonglee_zigbee_router_8.0.2.0_115200_sw_flow.gbl"
