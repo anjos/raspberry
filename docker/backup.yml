@@ -6,7 +6,7 @@ services:
     network_mode: bridge
     hostname: raspberry
     volumes:
-      - rsnapshot:/config
+      - backup_rsnapshot:/config
       - /backup:/.snapshots
       - media_deluge:/data/media_deluge
       - media_plex:/data/media_plex
@@ -14,7 +14,6 @@ services:
       - media_sonarr:/data/media_sonarr
       - media_prowlarr:/data/media_prowlarr
       - monitor_diun:/data/monitor_diun
-      - portainer:/data/portainer
       - smarthome_mosquitto_data:/data/smarthome_mosquitto_data
       - smarthome_mosquitto_log:/data/smarthome_mosquitto_log
       - smarthome_zigbee2mqtt:/data/smarthome_zigbee2mqtt
@@ -24,7 +23,8 @@ services:
       - PUID=${PUID}
       - PGID=${PGID}
 volumes:
-  rsnapshot:
+  backup_rsnapshot:
+    external: true
   media_deluge:
     external: true
   media_plex:
@@ -36,8 +36,6 @@ volumes:
   media_prowlarr:
     external: true
   monitor_diun:
-    external: true
-  portainer:
     external: true
   smarthome_mosquitto_data:
     external: true

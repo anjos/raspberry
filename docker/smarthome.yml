@@ -10,8 +10,8 @@ services:
       - 1883:1883
       - 9001:9001
     volumes:
-      - mosquitto_data:/mosquitto/data
-      - mosquitto_log:/mosquitto/log
+      - smarthome_mosquitto_data:/mosquitto/data
+      - smarthome_mosquitto_log:/mosquitto/log
     command: mosquitto -c /mosquitto-no-auth.conf
     healthcheck:
       test:
@@ -42,7 +42,7 @@ services:
     ports:
       - 8080:8080
     volumes:
-      - zigbee2mqtt:/app/data
+      - smarthome_zigbee2mqtt:/app/data
       - /run/udev:/run/udev:ro
     devices:
       - /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20231101144759-if00:/dev/ttyACM0
@@ -66,7 +66,7 @@ services:
     hostname: raspberry
     network_mode: host
     volumes:
-      - homebridge:/homebridge
+      - smarthome_homebridge:/homebridge
     depends_on:
       zigbee2mqtt:
         condition: service_started
@@ -89,7 +89,11 @@ networks:
   network:
     driver: bridge
 volumes:
-  mosquitto_data:
-  mosquitto_log:
-  zigbee2mqtt:
-  homebridge:
+  smarthome_mosquitto_data:
+    external: true
+  smarthome_mosquitto_log:
+    external: true
+  smarthome_zigbee2mqtt:
+    external: true
+  smarthome_homebridge:
+    external: true

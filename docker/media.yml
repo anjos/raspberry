@@ -13,7 +13,7 @@ services:
       start_period: 30s
       timeout: 2s
     volumes:
-      - plex:/config
+      - media_plex:/config
       - /media:/data
       - /media/tmp:/transcode
     environment:
@@ -44,7 +44,7 @@ services:
       start_period: 30s
       timeout: 2s
     volumes:
-      - deluge:/config
+      - media_deluge:/config
       - /media/downloads:/media/downloads
     environment:
       - DELUGE_LOGLEVEL=${DELUGE_LOGLEVEL}
@@ -72,7 +72,7 @@ services:
       - PUID=${PUID}
       - PGID=${PGID}
     volumes:
-      - radarr:/config
+      - media_radarr:/config
       - /media:/media
   # TV show downloader/manager for usenet and torrent users.
   sonarr:
@@ -95,7 +95,7 @@ services:
       - PUID=${PUID}
       - PGID=${PGID}
     volumes:
-      - sonarr:/config
+      - media_sonarr:/config
       - /media:/media
   # Centralized indexer
   prowlarr:
@@ -118,7 +118,7 @@ services:
       - PUID=${PUID}
       - PGID=${PGID}
     volumes:
-      - prowlarr:/config
+      - media_prowlarr:/config
   # Captcha solver for cloudfare human controls
   flaresolverr:
     image: ghcr.io/flaresolverr/flaresolverr:latest
@@ -146,8 +146,13 @@ networks:
     driver: bridge
 # Create volumes by visiting the "Volumes" tab on the left
 volumes:
-  plex:
-  deluge:
-  radarr:
-  sonarr:
-  prowlarr:
+  media_plex:
+    external: true
+  media_deluge:
+    external: true
+  media_radarr:
+    external: true
+  media_sonarr:
+    external: true
+  media_prowlarr:
+    external: true

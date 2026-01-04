@@ -9,7 +9,7 @@ services:
     hostname: raspberry
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-      - diun:/data
+      - monitor_diun:/data
     environment:
       - LOG_LEVEL=info
       - LOG_JSON=false
@@ -37,4 +37,5 @@ services:
       - TZ=${TZ}
 # Create volumes by visiting the "Volumes" tab on the left
 volumes:
-  diun:
+  monitor_diun:
+    external: true
