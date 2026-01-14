@@ -1,4 +1,4 @@
-[project]
+[workspace]
 name = "firmware-flasher"
 platforms = ["linux-aarch64"]
 channels = ["conda-forge"]
