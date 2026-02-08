@@ -141,6 +141,7 @@ def main():
         "entrance-ceiling-lights": 12,
         "entrance-console-lights": 13,
         "balcony-ceiling-lights": 14,
+        "kitchen-counter-overhead-lights": 15,
         "shower-room": 16,
     }
     group_id = GROUP_ID_DICT[os.path.splitext(os.path.basename(args.yaml_file))[0]]
