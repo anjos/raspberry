@@ -90,11 +90,11 @@ Living room:
       state: 'OFF'
     Living room Table light 1:
       state: 'ON'
-      brightness: 254
+      brightness: 200
       color_temp: 280
     Living room Table light 2:
       state: 'ON'
-      brightness: 254
+      brightness: 200
       color_temp: 280
     Living room Photo frame plug:
       state: 'ON'
