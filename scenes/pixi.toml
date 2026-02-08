@@ -1,4 +1,4 @@
-[project]
+[workspace]
 name = "scenes"
 platforms = ["linux-aarch64", "osx-arm64"]
 channels = ["conda-forge"]

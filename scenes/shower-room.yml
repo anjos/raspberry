@@ -1,0 +1,17 @@
+Shower room:
+    "Off":
+        Shower room Switch:
+          state_l1: "OFF"
+          state_l2: "OFF"
+    "On":
+      Shower room Switch:
+          state_l1: "ON"
+          state_l2: "ON"
+    "Cozy":
+        Shower room Switch:
+          state_l1: "ON"
+          state_l2: "OFF"
+    "Sink":
+        Shower room Switch:
+          state_l1: "OFF"
+          state_l2: "ON"
