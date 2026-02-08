@@ -590,6 +590,8 @@ entrance/wall/switch 2 and 4/OFF:
       payload: {scene_recall: 1}
     - entity: Balcony
       payload: {scene_recall: 1}
+    - entity: Shower room
+      payload: {scene_recall: 1}
 
 entrance/wall/switch 1/ON:
   active: true
