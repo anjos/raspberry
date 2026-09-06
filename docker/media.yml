@@ -15,7 +15,7 @@ services:
     volumes:
       - media_plex:/config
       - /media:/data
-      - /media/tmp:/transcode
+      - /var/lib/plex-transcode:/transcode
     environment:
       - VERSION=docker
       - PLEX_CLAIM=${PLEX_CLAIM}
