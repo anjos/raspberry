@@ -43,6 +43,9 @@ services:
       - 8080:8080
     volumes:
       - smarthome_zigbee2mqtt:/app/data
+      - ./zigbee2mqtt/configuration.yaml:/app/data/configuration.yaml
+      - ./zigbee2mqtt/automations.yaml:/app/data/automations.yaml
+      - ./zigbee2mqtt/external_extensions:/app/data/external_extensions
       - /run/udev:/run/udev:ro
     devices:
       - /dev/serial/by-id/usb-ITEAD_SONOFF_Zigbee_3.0_USB_Dongle_Plus_V2_20231101144759-if00:/dev/ttyACM0

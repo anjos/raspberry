@@ -1,0 +1,287 @@
+homeassistant:
+  enabled: false
+frontend:
+  enabled: true
+  package: zigbee2mqtt-windfront
+mqtt:
+  base_topic: zigbee2mqtt
+  server: mqtt://mosquitto
+serial:
+  port: /dev/ttyACM0
+  adapter: ember
+device_options: {}
+devices:
+  '0x0017880104dd706c':
+    friendly_name: Office Ceiling light 3
+    description: Ceiling light at office (closest to window)
+    icon: device_icons/f7e6dce00adf60dc51bb93cdbb035c2a.png
+  '0x0017880104951663':
+    friendly_name: Office Ceiling light 1
+    description: Ceiling light at office (closest to door)
+    icon: device_icons/f7e6dce00adf60dc51bb93cdbb035c2a.png
+  '0x0017880104dd52a6':
+    friendly_name: Office Ceiling light 2
+    description: Ceiling light at office (middle)
+    icon: device_icons/f7e6dce00adf60dc51bb93cdbb035c2a.png
+  '0x00178801044b8ea0':
+    friendly_name: Office Window light bar
+    description: Light bar under the office window
+    transition: 0
+    icon: device_icons/6e024ab8c7c701fb304eca7d1bdf7db4.png
+  '0x086bd7fffe81e91d':
+    friendly_name: Office Reading light plug
+    description: Table reading light switch
+    icon: device_icons/aa1729387e1d5947439967cc50ef9fac.png
+  '0x90fd9ffffef502c8':
+    friendly_name: office/desk/switch
+    icon: device_icons/0bb605a453f07b8806fb5bd0288dd434.png
+  '0x00158d000429f51d':
+    friendly_name: Balcony Thermometer 2
+    icon: device_icons/8da97afa2d57d9d2e86756a4aa2a6072.png
+  '0x001788010427be47':
+    friendly_name: David Ceiling light 1
+    description: Ceiling light at David's room (closest to door)
+    icon: device_icons/f7e6dce00adf60dc51bb93cdbb035c2a.png
+  '0x0017880104deb1d6':
+    friendly_name: David Ceiling light 2
+    description: Ceiling light at David's room (middle)
+    icon: device_icons/f7e6dce00adf60dc51bb93cdbb035c2a.png
+  '0x0017880104deb1da':
+    friendly_name: David Ceiling light 3
+    description: Ceiling light at David's room (closest to window)
+    icon: device_icons/f7e6dce00adf60dc51bb93cdbb035c2a.png
+  '0x001788010d7fdc8f':
+    friendly_name: David Reading light plug
+    description: Table reading light switch
+    icon: device_icons/a8ce70ef4380e68d1656c481952af5a4.png
+  '0xd0cf5efffe2dd3cd':
+    friendly_name: David Reading light 1
+    description: Reading light at David's drawer cabinet (closest to window)
+    icon: device_icons/08af13272741c977315491cf7d965813.png
+  '0xd0cf5efffe25e49e':
+    friendly_name: David Reading light 2
+    description: |
+      Reading light at David's drawer cabinet (closest to door)
+    icon: device_icons/08af13272741c977315491cf7d965813.png
+  '0x001788010685ef7f':
+    friendly_name: A2 Ceiling light
+    description: Ceiling light at the master bedroom
+    icon: device_icons/cbbb8c6abdde92456564c9f8d929acd1.png
+  '0xd0cf5efffe25e6d7':
+    friendly_name: A2 Reading light Aninha
+    description: Reading light close to the wardrobes
+    icon: device_icons/08af13272741c977315491cf7d965813.png
+  '0xd0cf5efffeb4485a':
+    friendly_name: a2/andre/nightstand/switch
+    icon: device_icons/0bb605a453f07b8806fb5bd0288dd434.png
+  '0xd0cf5efffe16e0b8':
+    friendly_name: A2 Reading light Andre
+    description: Reading light close to the window
+    icon: device_icons/08af13272741c977315491cf7d965813.png
+  '0x90fd9ffffef141e6':
+    friendly_name: a2/aninha/nightstand/switch
+    icon: device_icons/0bb605a453f07b8806fb5bd0288dd434.png
+  '0x00178801048c1ca6':
+    friendly_name: Kitchen Cupboard light bar
+    description: Light bar located close to the door, at the kitchen cupboard
+    icon: device_icons/6e024ab8c7c701fb304eca7d1bdf7db4.png
+  '0x001788010336f842':
+    friendly_name: Kitchen Ceiling light
+    description: Ceiling light in the kitchen
+    icon: device_icons/cbbb8c6abdde92456564c9f8d929acd1.png
+  '0x0017880104cf8fdd':
+    friendly_name: Balcony Ceiling light 1
+    description: One of the two bulbs on the ceiling lights at the balcony
+    icon: device_icons/8eb4d553133bd9958ebbbb4a3d611306.png
+  '0x001788010424fc1e':
+    friendly_name: Balcony Ceiling light 2
+    description: One of the two bulbs on the ceiling lights at the balcony
+    icon: device_icons/8eb4d553133bd9958ebbbb4a3d611306.png
+  '0x001788010668813e':
+    friendly_name: Balcony Light bar
+    description: Light bar on the top of the balcony doors
+    icon: device_icons/421fdbf771b7cadaaaff955d86b161ff.png
+  '0xd0cf5efffec1954e':
+    friendly_name: balcony/desk/switch
+    icon: device_icons/0bb605a453f07b8806fb5bd0288dd434.png
+  '0x0ceff6fffee02379':
+    friendly_name: A2 Thermometer
+    icon: device_icons/d5cf7e365fed2168925ab63b5dfd83e6.png
+  '0x001788010b592781':
+    friendly_name: Living room Photo frame plug
+    description: Philips plug controlling the photo frame
+    icon: device_icons/a8ce70ef4380e68d1656c481952af5a4.png
+  '0x048727fffeb1d7a5':
+    friendly_name: Living room Thermometer
+    icon: device_icons/d5cf7e365fed2168925ab63b5dfd83e6.png
+  '0x90fd9ffffe52179d':
+    friendly_name: Living room Ceiling light 1
+    description: Ceiling light in the living room (closest to the kitchen entrance)
+    icon: device_icons/ba883617d108de69a0d5a397a203e979.png
+  '0x90fd9ffffe59b7b8':
+    friendly_name: Living room Ceiling light 2
+    description: >-
+      Ceiling light in the living room (the second closest to the kitchen
+      entrance)
+    icon: device_icons/ba883617d108de69a0d5a397a203e979.png
+  '0x90fd9ffffe624d2b':
+    friendly_name: Living room Ceiling light 3
+    description: Ceiling light in the living room (second closest to the TV and windows)
+    icon: device_icons/ba883617d108de69a0d5a397a203e979.png
+  '0xd0cf5efffebeaf2b':
+    friendly_name: Living room Ceiling light 4
+    description: Ceiling light in the living room (closest to the TV and window)
+    icon: device_icons/ba883617d108de69a0d5a397a203e979.png
+  '0xd0cf5efffe227545':
+    friendly_name: Living room Corner side table light
+    description: Reading table light by the side of Ana's plant
+    icon: device_icons/08af13272741c977315491cf7d965813.png
+  '0xd0cf5efffe29e429':
+    friendly_name: Living room TV side table light
+    description: Reading table light on a side table by the TV
+    icon: device_icons/08af13272741c977315491cf7d965813.png
+  '0xd0cf5efffe1228da':
+    friendly_name: Living room Corridor ceiling light
+    description: Single spot light at the corridor
+    icon: device_icons/ba883617d108de69a0d5a397a203e979.png
+  '0xd0cf5efffec2a4d3':
+    friendly_name: living-room/side-table/switch
+    icon: device_icons/0bb605a453f07b8806fb5bd0288dd434.png
+  '0x0017880103c62b90':
+    friendly_name: Entrance Console light 1
+    description: Reading table light on the left of the console (closest to the door)
+    icon: device_icons/f33e3f318365ca1357a4caca7e60f302.png
+  '0x0017880103c62b35':
+    friendly_name: Entrance Console light 2
+    description: Reading table light on the right of the console (farthest from the door)
+    icon: device_icons/f33e3f318365ca1357a4caca7e60f302.png
+  '0x90fd9ffffe61a164':
+    friendly_name: Entrance Ceiling light 1
+    description: Ceiling light at the entrance (closest to the main door)
+    icon: device_icons/ba883617d108de69a0d5a397a203e979.png
+  '0xd0cf5efffe11993f':
+    friendly_name: Entrance Ceiling light 2
+    description: Ceiling light at the entrance (farthest from the main door)
+    icon: device_icons/ba883617d108de69a0d5a397a203e979.png
+  '0xa4c1388f07bcbb65':
+    friendly_name: Kitchen Counter overhead light 1
+    description: Bulb under the kitchen cupboard (closest to cooking plate)
+    icon: device_icons/2bab7a960e244017b0962095dbf9fa34.png
+  '0xa4c138d87e0df6b7':
+    friendly_name: Kitchen Counter overhead light 2
+    description: Bulb under the kitchen cupboard (second closest to cooking plate)
+    icon: device_icons/2bab7a960e244017b0962095dbf9fa34.png
+  '0xa4c13893502914c3':
+    friendly_name: Kitchen Counter overhead light 3
+    description: Bulb under the kitchen cupboard (second closest to the balcony door)
+    icon: device_icons/2bab7a960e244017b0962095dbf9fa34.png
+  '0xa4c1388b2660d6bb':
+    friendly_name: Kitchen Counter overhead light 4
+    description: Bulb under the kitchen cupboard (closest to the balcony door)
+    icon: device_icons/2bab7a960e244017b0962095dbf9fa34.png
+  '0xe0798dfffef43f86':
+    friendly_name: Entrance Zigbee router
+    description: Sonoff zigbee dongle flashed with router firmware
+    icon: device_icons/3de314b4d967e0f98d80f1ff0e72f7c8.png
+  '0x0017880104f11785':
+    friendly_name: david/desk/switch
+    icon: device_icons/b20e96d0ea67ae0b111d6b2abe4ce696.png
+  '0x001788010c55bd58':
+    friendly_name: David Window light bar
+    description: Gradient light bar under David's window.
+    icon: device_icons/bac5e4c5f7f4968745a0f143b9c0135e.png
+  '0x001788010d944603':
+    friendly_name: Living room Table light 1
+    description: Light on above the dining table (closest to the kitchen entrance)
+    icon: device_icons/c24b9e897fd232864b1c152aabdea991.png
+  '0x001788010d944751':
+    friendly_name: Living room Table light 2
+    description: Light on above the dining table (closest to the window)
+    icon: device_icons/c24b9e897fd232864b1c152aabdea991.png
+  '0x00178801064dadd8':
+    friendly_name: Living room Window side table light
+    description: Reading table light located between the two living room resting chairs
+    icon: device_icons/5da3b3848eeb1f5eb9b03cdd650bd211.png
+  '0x00178801062d87a8':
+    friendly_name: Living room Light stand
+    description: Light stand behind one of the arm chairs in the living room (corner)
+    icon: device_icons/5da3b3848eeb1f5eb9b03cdd650bd211.png
+  '0x44e2f8fffe0ed0e8':
+    friendly_name: David Thermometer
+    icon: device_icons/d5cf7e365fed2168925ab63b5dfd83e6.png
+  '0x8c65a3fffee5dda1':
+    friendly_name: Office Thermometer
+    description: Thermometer placed on the side of the office drawers
+    icon: device_icons/d5cf7e365fed2168925ab63b5dfd83e6.png
+  '0x8c65a3fffee5e083':
+    friendly_name: Balcony Thermometer
+    icon: device_icons/d5cf7e365fed2168925ab63b5dfd83e6.png
+  '0x000000000170404d':
+    friendly_name: david/wall/switch
+    icon: device_icons/ff68caf0ab201c5bc66105d0b69eebb8.png
+  '0x000000000170f360':
+    friendly_name: a2/wall/switch
+    icon: device_icons/ff68caf0ab201c5bc66105d0b69eebb8.png
+  '0x0000000001703715':
+    friendly_name: office/wall/switch
+    icon: device_icons/ff68caf0ab201c5bc66105d0b69eebb8.png
+  '0x000000000170715f':
+    friendly_name: entrance/wall/switch
+    icon: device_icons/ff68caf0ab201c5bc66105d0b69eebb8.png
+  '0x000000000170885a':
+    friendly_name: living-room/wall/switch
+    icon: device_icons/ff68caf0ab201c5bc66105d0b69eebb8.png
+  '0x0000000001704707':
+    friendly_name: kitchen/wall/switch
+    icon: device_icons/ff68caf0ab201c5bc66105d0b69eebb8.png
+  '0x983268fffe9df265':
+    friendly_name: Entrance Thermometer
+    description: Thermometer at the entrance hall.
+  '0xe4b063fffe6837a1':
+    friendly_name: Shower room Switch
+    description: Double switch control under the mechanical switch of the shower room.
+    debounce_ignore: []
+availability:
+  enabled: true
+  active:
+    timeout: 60
+    pause_on_backoff_gt: 3
+    max_jitter: 60000
+  passive:
+    timeout: 1500
+groups:
+  '1':
+    friendly_name: Office
+  '2':
+    friendly_name: David
+  '3':
+    friendly_name: Office Ceiling lights
+  '4':
+    friendly_name: David Ceiling lights
+  '5':
+    friendly_name: A2
+  '6':
+    friendly_name: Kitchen
+  '7':
+    friendly_name: Balcony
+  '8':
+    friendly_name: Living room
+  '9':
+    friendly_name: Living room Ceiling lights
+  '10':
+    friendly_name: Living room Table lights
+  '11':
+    friendly_name: Entrance
+  '12':
+    friendly_name: Entrance Ceiling lights
+  '13':
+    friendly_name: Entrance Console lights
+  '14':
+    friendly_name: Balcony Ceiling lights
+  '15':
+    friendly_name: Kitchen Counter overhead lights
+  '16':
+    friendly_name: Shower room
+advanced:
+  log_level: warning
+version: 5
