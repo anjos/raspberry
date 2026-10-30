@@ -24,7 +24,8 @@ checklist in order.
 ## 2. Pick stack, port, paths
 
 - Stack: the one whose services it must talk to (shared `network` bridge,
-  resolve by hostname). Cross-stack networking is not used here.
+  resolve by hostname). The only cross-stack member is caddy (`proxy`), which
+  joins the other stacks' networks as external networks.
 - Port: must not appear in `ss -tlnpu` or the AGENTS.md port map.
 - Data under `/media`: mount `/media:/media` like radarr/sonarr so paths match
   qbittorrent's (`/media/downloads`). Create new library dirs as uid 1000
@@ -78,5 +79,9 @@ docker exec rsnapshot ls /data/                                  # new volume li
 
 - Configure the app (API where possible). Any credentials come from the
   owner; never read them out of other apps' databases, and never commit them.
+- If it has a web UI, publish it over HTTPS: Caddyfile site, `mdns-names` line,
+  index tile (see AGENTS.md "HTTPS"). If it's an *arr, set its Application URL
+  to the https name. Wire it to other services by `http://<container>:<port>`,
+  never by the https name.
 - Commit with a scope prefix, e.g. `media: add <app>`.
 - Record new gotchas in AGENTS.md or a skill.
