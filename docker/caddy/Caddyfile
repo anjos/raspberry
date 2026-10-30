@@ -1,0 +1,121 @@
+# HTTPS for the web UIs, LAN only. Certificates come from Caddy's private CA
+# (root in /data/caddy/pki/authorities/local, valid 10 years; leaf certificates
+# rotate automatically). Devices trust the root once: http://raspberry.local/ca.crt
+#
+# Services keep talking to each other over plain HTTP by container hostname;
+# these names are for people only. Each name below also needs an mDNS entry in
+# mdns-names and a tile in site/index.html.
+#
+# Short aliases (<alias>.raspberry.local, <name|alias>.rb.local, rb.local)
+# redirect to the full name, so each app keeps a single origin (one login).
+#
+# Reload after editing: docker exec caddy caddy reload --config /etc/caddy/Caddyfile
+{
+	local_certs
+	skip_install_trust
+}
+
+# Root certificate download (browsers may upgrade http:// links to https://)
+(ca_crt) {
+	handle /ca.crt {
+		root * /data/caddy/pki/authorities/local
+		rewrite * /root.crt
+		header Content-Type application/x-x509-ca-cert
+		header Content-Disposition "attachment; filename=raspberry-ca.crt"
+		file_server
+	}
+}
+
+# Index of all services
+raspberry.local {
+	import ca_crt
+	handle {
+		root * /etc/caddy/site
+		file_server
+	}
+}
+
+rb.local {
+	redir https://raspberry.local{uri}
+}
+
+# Plain HTTP only to download the root certificate on a new device
+http://raspberry.local, http://rb.local {
+	import ca_crt
+	handle {
+		redir https://{host}{uri}
+	}
+}
+
+plex.raspberry.local {
+	reverse_proxy host.docker.internal:32400
+}
+
+plex.rb.local {
+	redir https://plex.raspberry.local{uri}
+}
+
+qbittorrent.raspberry.local {
+	reverse_proxy qbittorrent:8123
+}
+
+qbittorrent.rb.local, qbt.raspberry.local, qbt.rb.local {
+	redir https://qbittorrent.raspberry.local{uri}
+}
+
+radarr.raspberry.local {
+	reverse_proxy radarr:7878 {
+		# The app ignores X-Forwarded-Proto and redirects to http://
+		header_down Location ^http:// https://
+	}
+}
+
+radarr.rb.local, radr.raspberry.local, radr.rb.local {
+	redir https://radarr.raspberry.local{uri}
+}
+
+sonarr.raspberry.local {
+	reverse_proxy sonarr:8989 {
+		# The app ignores X-Forwarded-Proto and redirects to http://
+		header_down Location ^http:// https://
+	}
+}
+
+sonarr.rb.local, sonr.raspberry.local, sonr.rb.local {
+	redir https://sonarr.raspberry.local{uri}
+}
+
+chaptarr.raspberry.local {
+	reverse_proxy chaptarr:8789
+}
+
+chaptarr.rb.local, chaptr.raspberry.local, chaptr.rb.local {
+	redir https://chaptarr.raspberry.local{uri}
+}
+
+prowlarr.raspberry.local {
+	reverse_proxy prowlarr:9696 {
+		# The app ignores X-Forwarded-Proto and redirects to http://
+		header_down Location ^http:// https://
+	}
+}
+
+prowlarr.rb.local, prowlr.raspberry.local, prowlr.rb.local {
+	redir https://prowlarr.raspberry.local{uri}
+}
+
+zigbee2mqtt.raspberry.local {
+	reverse_proxy zigbee2mqtt:8080
+}
+
+zigbee2mqtt.rb.local, z2m.raspberry.local, z2m.rb.local {
+	redir https://zigbee2mqtt.raspberry.local{uri}
+}
+
+homebridge.raspberry.local {
+	reverse_proxy host.docker.internal:8581
+}
+
+homebridge.rb.local, hb.raspberry.local, hb.rb.local {
+	redir https://homebridge.raspberry.local{uri}
+}

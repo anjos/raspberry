@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>raspberry</title>
+<link rel="icon" href="icons/raspberry-pi.svg" type="image/svg+xml">
+<style>
+  /* Icons from homarr-labs/dashboard-icons. Each tile's --c is its icon's
+     dominant brand colour (largest coloured area, ignoring black/white/grey). */
+  :root {
+    --bg: #f4f5f7;
+    --card: #ffffff;
+    --text: #1d1f23;
+    --muted: #646a73;
+    --tint: 16%;
+    --edge: 45%;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #15171a;
+      --card: #1f2226;
+      --text: #e8eaed;
+      --muted: #9aa0a6;
+      --tint: 24%;
+      --edge: 55%;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 24px 16px 40px;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.4 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  main { max-width: 960px; margin: 0 auto; }
+  header { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+  header img { width: 40px; height: 40px; }
+  h1 { margin: 0; font-size: 1.6rem; }
+  h2 { margin: 28px 0 10px; font-size: .8rem; letter-spacing: .08em;
+       text-transform: uppercase; color: var(--muted); }
+  .grid { display: grid; gap: 12px;
+          grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+  a.tile {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 10px; padding: 20px 12px; min-height: 130px;
+    background: color-mix(in srgb, var(--c) var(--tint), var(--card));
+    border: 1px solid color-mix(in srgb, var(--c) var(--edge), var(--card));
+    border-radius: 14px;
+    color: inherit; text-decoration: none; text-align: center;
+    transition: border-color .15s, transform .15s;
+  }
+  a.tile:hover, a.tile:focus-visible { border-color: var(--c); transform: translateY(-2px); }
+  a.tile img, a.tile svg { width: 56px; height: 56px; }
+  /* Dark outlines (e.g. Radarr) vanish on dark tiles: add a faint light halo */
+  @media (prefers-color-scheme: dark) {
+    a.tile img { filter: drop-shadow(0 0 1px rgba(255, 255, 255, .7)); }
+  }
+  .name { font-weight: 600; }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <img src="icons/raspberry-pi.svg" alt="">
+    <h1>raspberry</h1>
+  </header>
+
+  <h2>Media</h2>
+  <div class="grid">
+    <a class="tile" style="--c:#e5a00d" href="https://plex.raspberry.local/web/"><img src="icons/plex.svg" alt=""><span class="name">Plex</span></a>
+    <a class="tile" style="--c:#ffc230" href="https://radarr.raspberry.local/"><img src="icons/radarr.svg" alt=""><span class="name">Radarr</span></a>
+    <a class="tile" style="--c:#09beed" href="https://sonarr.raspberry.local/"><img src="icons/sonarr.svg" alt=""><span class="name">Sonarr</span></a>
+    <a class="tile" style="--c:#810020" href="https://chaptarr.raspberry.local/"><img src="icons/chaptarr.svg" alt=""><span class="name">Chaptarr</span></a>
+    <a class="tile" style="--c:#e66009" href="https://prowlarr.raspberry.local/"><img src="icons/prowlarr.svg" alt=""><span class="name">Prowlarr</span></a>
+    <a class="tile" style="--c:#5997df" href="https://qbittorrent.raspberry.local/"><img src="icons/qbittorrent.svg" alt=""><span class="name">qBittorrent</span></a>
+  </div>
+
+  <h2>Smart home</h2>
+  <div class="grid">
+    <a class="tile" style="--c:#fcbd36" href="https://zigbee2mqtt.raspberry.local/"><img src="icons/zigbee2mqtt.svg" alt=""><span class="name">Zigbee2MQTT</span></a>
+    <a class="tile" style="--c:#4c2165" href="https://homebridge.raspberry.local/"><img src="icons/homebridge.svg" alt=""><span class="name">Homebridge</span></a>
+  </div>
+
+  <h2>Setup</h2>
+  <div class="grid">
+    <a class="tile" style="--c:#bc1142" href="/ca.crt" download="raspberry-ca.crt">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#bc1142" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><circle cx="12" cy="15.5" r="1.5"/></svg>
+      <span class="name">Certificate</span>
+    </a>
+  </div>
+</main>
+</body>
+</html>

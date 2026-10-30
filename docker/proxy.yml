@@ -1,0 +1,38 @@
+services:
+  # HTTPS front door for the web UIs (https://<service>.raspberry.local),
+  # certificates issued by Caddy's own private CA. See caddy/Caddyfile.
+  caddy:
+    image: caddy:latest
+    container_name: caddy
+    restart: unless-stopped
+    hostname: caddy
+    networks:
+      - media
+      - smarthome
+    ports:
+      - 80:80
+      - 443:443
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    healthcheck:
+      test: wget --spider --quiet http://127.0.0.1:2019/config/ || exit 1
+      interval: 60s
+      retries: 5
+      start_period: 30s
+      timeout: 2s
+    volumes:
+      - proxy_caddy:/data
+      - ./caddy:/etc/caddy:ro
+    environment:
+      - TZ=${TZ}
+# Join the other stacks' networks to reach their services by hostname
+networks:
+  media:
+    name: media_network
+    external: true
+  smarthome:
+    name: smarthome_network
+    external: true
+volumes:
+  proxy_caddy:
+    external: true

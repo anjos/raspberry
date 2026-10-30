@@ -15,6 +15,7 @@ services:
       - media_qbittorrent:/data/media_qbittorrent
       - media_prowlarr:/data/media_prowlarr
       - monitor_diun:/data/monitor_diun
+      - proxy_caddy:/data/proxy_caddy
       - smarthome_mosquitto_data:/data/smarthome_mosquitto_data
       - smarthome_mosquitto_log:/data/smarthome_mosquitto_log
       - smarthome_zigbee2mqtt:/data/smarthome_zigbee2mqtt
@@ -39,6 +40,8 @@ volumes:
   media_prowlarr:
     external: true
   monitor_diun:
+    external: true
+  proxy_caddy:
     external: true
   smarthome_mosquitto_data:
     external: true
