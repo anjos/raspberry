@@ -12,6 +12,7 @@ services:
     ports:
       - 80:80
       - 443:443
+      - 443:443/udp  # HTTP/3: caddy advertises it, so it must be reachable
     extra_hosts:
       - host.docker.internal:host-gateway
     healthcheck:
