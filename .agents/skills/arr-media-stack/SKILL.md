@@ -63,6 +63,22 @@ username/password from the owner, then `/api/v2/app/preferences`,
   `ratio_limit`, `share_limit_action`). They are all "Default" (global) today.
 - qBittorrent's share-limit action must stay **Stop**. "Remove with content"
   makes chaptarr reject the client and races radarr/sonarr imports.
+- Chaptarr "being prepared by the metadata server" = a 202 that saves a
+  *pending author import* (`GET/DELETE pendingauthorimport[/id]`). It retries
+  forever if the requested `gr:` work never appears in the author's catalog.
+  Fix: `book/lookup?term=gr:<id>` returns the `hc:` record; POST it to `book`
+  with `author` = existing `author/<id>`, `monitored/ebookMonitored=true`,
+  then `command {"name":"BookSearch","bookIds":[id]}`. Then delete the pending entry.
+- Chaptarr's release matching is loose. "Fire & Blood: 300 Years Before A Game
+  of Thrones" was grabbed for "A Game of Thrones". Check `queue` after a
+  search. Fix with `DELETE queue/<id>?removeFromClient=true&blocklist=true`,
+  `GET release?bookId=` (results under `.releases`), and
+  `POST release {guid,indexerId,bookId}`. Good releases can also sit in
+  `.hiddenReleases` as "Title/Author mismatch" when the catalog title has a
+  subtitle ("Artemis: A Novel"). Grabbing them the same way works.
+- Import "matched a different book" (bad catalog titles): `GET manualimport?downloadId=`,
+  then `command ManualImport` with files `{path,authorId,bookId,editionId
+  (numeric, from edition?bookId=),quality,downloadId,disableReleaseSwitching:true}`.
 - New chaptarr instances start with authentication "None". The owner sets
   the login on first UI visit.
 - Hostnames inside the `media_network` bridge: `qbittorrent`, `prowlarr`,
