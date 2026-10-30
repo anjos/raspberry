@@ -42,7 +42,7 @@ file's basename: `media.yml` -> project `media`, network `media_network`.
 | Port            | Service                  | Port        | Service              |
 | --------------- | ------------------------ | ----------- | -------------------- |
 | 22              | host sshd                | 8191        | flaresolverr         |
-| 80, 443         | caddy                    | 8581 (host) | homebridge           |
+| 80, 443 (+443/udp) | caddy                 | 8581 (host) | homebridge           |
 | 1883            | mosquitto (9001 published but unused) | 2019 (in container) | caddy admin |
 | 6881 tcp/udp    | qbittorrent (torrenting) | 8789        | chaptarr             |
 | 7878            | radarr                   | 8989        | sonarr               |
@@ -110,6 +110,15 @@ Verify live with `ss -tlnpu` and `docker ps --format '{{.Names}}\t{{.Ports}}'`.
 - Radarr, Sonarr and Prowlarr ignore `X-Forwarded-Proto` and redirect to
   `http://`, so their Caddyfile blocks rewrite `Location` with
   `header_down Location ^http:// https://`. Chaptarr doesn't need it.
+- iOS: an installed but not-yet-trusted profile makes the `*.raspberry.local` tiles
+  do nothing at all, with no warning. Caddy logs `tls: unknown certificate`
+  (visible only with `debug` in the global options). The page for
+  `raspberry.local` itself can still load through a remembered "visit anyway"
+  exception. Fix: turn the root on in Certificate Trust Settings.
+- `443/udp` must be published: caddy advertises HTTP/3 (`alt-svc: h3`) and
+  browsers remember that for 30 days.
+- A caddy reload or restart drops the websockets of the Homebridge and
+  Zigbee2MQTT UIs, which then reconnect (the UI flickers briefly).
 - The caddy healthcheck must use `127.0.0.1:2019`, not `localhost`: busybox wget
   tries `::1` and the admin API only listens on IPv4.
 
