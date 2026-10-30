@@ -13,6 +13,7 @@ services:
       - media_radarr:/data/media_radarr
       - media_sonarr:/data/media_sonarr
       - media_chaptarr:/data/media_chaptarr
+      - media_qbittorrent:/data/media_qbittorrent
       - media_prowlarr:/data/media_prowlarr
       - monitor_diun:/data/monitor_diun
       - smarthome_mosquitto_data:/data/smarthome_mosquitto_data
@@ -35,6 +36,8 @@ volumes:
   media_sonarr:
     external: true
   media_chaptarr:
+    external: true
+  media_qbittorrent:
     external: true
   media_prowlarr:
     external: true
