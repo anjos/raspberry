@@ -83,12 +83,14 @@ ls() {
 }
 
 log() {
-    local stack=_stackname "${1}"
-    docker compose --project-name "${stack}" logs "$@"
+    local stack=$(_stackname "${1}")
+    local file=$(_filename "${1}")
+    shift        # pop stack off, remaining args go to `docker compose logs`
+    docker compose --file "${file}" --project-name "${stack}" logs "$@"
 }
 
 tail() {
-    log $1 $2 --follow
+    log "$@" --follow
 }
 
 ps() {
