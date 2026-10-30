@@ -97,6 +97,31 @@ services:
     volumes:
       - media_sonarr:/config
       - /media:/media
+  # Book (ebook) downloader/manager for usenet and torrent users (Readarr fork).
+  # Not a linuxserver.io image: PUID/PGID handled by its own entrypoint, and
+  # it ships wget but no curl.
+  chaptarr:
+    image: chaptarr/chaptarr:latest
+    container_name: chaptarr
+    restart: unless-stopped
+    hostname: chaptarr
+    networks:
+      - network
+    ports:
+      - 8789:8789
+    healthcheck:
+      test: wget --spider --quiet localhost:8789/ping || exit 1
+      interval: 60s
+      retries: 5
+      start_period: 30s
+      timeout: 2s
+    environment:
+      - TZ=${TZ}
+      - PUID=${PUID}
+      - PGID=${PGID}
+    volumes:
+      - media_chaptarr:/config
+      - /media:/media
   # Centralized indexer
   prowlarr:
     image: lscr.io/linuxserver/prowlarr:latest
@@ -153,6 +178,8 @@ volumes:
   media_radarr:
     external: true
   media_sonarr:
+    external: true
+  media_chaptarr:
     external: true
   media_prowlarr:
     external: true
