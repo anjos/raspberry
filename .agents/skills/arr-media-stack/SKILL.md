@@ -75,7 +75,9 @@ username/password from the owner, then `/api/v2/app/preferences`,
   `GET release?bookId=` (results under `.releases`), and
   `POST release {guid,indexerId,bookId}`. Good releases can also sit in
   `.hiddenReleases` as "Title/Author mismatch" when the catalog title has a
-  subtitle ("Artemis: A Novel"). Grabbing them the same way works.
+  subtitle or series suffix ("Artemis: A Novel", "Hyperion (Hyperion Cantos,
+  Book 1)"). This is the usual reason a monitored book sits with nothing
+  grabbed. Grabbing them the same way works and imports automatically.
 - Import "matched a different book" (bad catalog titles): `GET manualimport?downloadId=`,
   then `command ManualImport` with files `{path,authorId,bookId,editionId
   (numeric, from edition?bookId=),quality,downloadId,disableReleaseSwitching:true}`.
