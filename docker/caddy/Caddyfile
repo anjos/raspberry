@@ -22,8 +22,26 @@
 # Index of all services
 anjos.fyi {
 	import cloudflare
-	root * /etc/caddy/site
-	file_server
+
+	# Written by the status container
+	@status path /status.json /health.json
+	handle @status {
+		root * /status
+		header Cache-Control no-store
+		file_server
+	}
+
+	# Build record, baked into the image
+	handle /build.json {
+		root * /build
+		header Cache-Control no-store
+		file_server
+	}
+
+	handle {
+		root * /etc/caddy/site
+		file_server
+	}
 }
 
 *.anjos.fyi {

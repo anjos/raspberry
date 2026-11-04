@@ -15,6 +15,12 @@
     --muted: #646a73;
     --tint: 16%;
     --edge: 45%;
+    --line: #e1e4e8;
+    --track: #e6e8ec;
+    --good: #1a8a4a;
+    --warning: #c77700;
+    --critical: #d0312d;
+    --state: var(--muted);
   }
   @media (prefers-color-scheme: dark) {
     :root {
@@ -24,6 +30,11 @@
       --muted: #9aa0a6;
       --tint: 24%;
       --edge: 55%;
+      --line: #33373d;
+      --track: #30343a;
+      --good: #3fbf78;
+      --warning: #f0a830;
+      --critical: #f2605c;
     }
   }
   * { box-sizing: border-box; }
@@ -58,6 +69,121 @@
     a.tile img { filter: drop-shadow(0 0 1px rgba(255, 255, 255, .7)); }
   }
   .name { font-weight: 600; }
+
+  /* HTTPS status: bar = certificate lifetime, tick = expected renewal,
+     hatched end = alert window. Dates come from /status.json. */
+  .panel {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 16px;
+    display: grid; gap: 18px;
+  }
+  .cert-head { display: flex; justify-content: space-between; align-items: baseline;
+               gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
+  .cert-name { font-weight: 600; overflow-wrap: anywhere; }
+  .badge { font-size: .85rem; font-weight: 600; white-space: nowrap; }
+  .badge::before { content: "\25CF"; color: var(--state); margin-right: 6px; }
+  .meter {
+    position: relative; height: 12px;
+    background: var(--track); border-radius: 6px;
+  }
+  .meter .zone {
+    position: absolute; top: 0; bottom: 0; right: 0;
+    border-radius: 0 6px 6px 0;
+    background: repeating-linear-gradient(135deg, var(--critical) 0 3px, transparent 3px 7px);
+    opacity: .55;
+  }
+  .meter .fill {
+    position: absolute; top: 0; bottom: 0; left: 0; min-width: 12px;
+    border-radius: 6px;
+    background: linear-gradient(90deg, color-mix(in srgb, var(--state) 45%, var(--track)), var(--state));
+    transition: width 1.2s cubic-bezier(.2, .8, .2, 1);
+  }
+  .meter .now {
+    position: absolute; top: 50%; width: 16px; height: 16px; margin: -8px 0 0 -8px;
+    border-radius: 50%; background: var(--state);
+    border: 2px solid var(--card);
+    transition: left 1.2s cubic-bezier(.2, .8, .2, 1);
+  }
+  .meter .now::after {
+    content: ""; position: absolute; inset: -2px; border-radius: 50%;
+    box-shadow: 0 0 0 0 var(--state); animation: pulse 2.4s ease-out infinite;
+  }
+  @keyframes pulse {
+    from { box-shadow: 0 0 0 0 color-mix(in srgb, var(--state) 60%, transparent); }
+    to { box-shadow: 0 0 0 9px transparent; }
+  }
+  .meter .tick {
+    position: absolute; top: -3px; bottom: -3px; width: 2px; margin-left: -1px;
+    background: var(--text); border-radius: 1px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .meter .fill, .meter .now { transition: none; }
+    .meter .now::after { animation: none; }
+  }
+  .times { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+           gap: 8px 16px; margin: 12px 0 0; }
+  .times dt { font-size: .75rem; color: var(--muted); }
+  .times dd { margin: 0; font-size: .9rem; }
+  .image { border-top: 1px solid var(--line); padding-top: 16px; }
+  .image code { font-size: .85em; overflow-wrap: anywhere; }
+  .checked { margin: 0; font-size: .75rem; color: var(--muted); }
+
+  .split { display: grid; gap: 0 16px; align-items: start;
+           grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr)); }
+
+  /* Raspberry Pi vitals, hourly from /health.json */
+  .pi-head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .heart {
+    width: 14px; height: 14px; border-radius: 50%; flex: none;
+    background: var(--state);
+    animation: beat var(--beat, 1.6s) ease-in-out infinite;
+  }
+  @keyframes beat {
+    0%, 40%, 100% { transform: scale(1); }
+    15% { transform: scale(1.35); }
+    28% { transform: scale(1.1); }
+    34% { transform: scale(1.25); }
+  }
+  .pi-title { font-weight: 600; }
+  .pi-uptime { color: var(--muted); font-size: .9rem; }
+  .pi-head .badge { margin-left: auto; }
+  .gauges { display: grid; gap: 10px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  @media (max-width: 360px) { .gauges { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  .gauge {
+    display: flex; flex-direction: column; align-items: center; gap: 2px;
+    min-width: 0; padding: 8px 6px 6px; text-align: center;
+    border: 1px solid var(--line); border-radius: 10px;
+  }
+  .gauge svg.arc { width: 84px; height: 72px; overflow: visible; }
+  .arc path { fill: none; stroke-width: 9; stroke-linecap: round; }
+  .arc .bg { stroke: var(--track); }
+  .arc .val { stroke: var(--state); transition: stroke-dasharray .8s ease, stroke .4s; }
+  .arc text { fill: var(--text); font-size: 21px; font-weight: 600; text-anchor: middle; }
+  .gauge-label { font-size: .8rem; font-weight: 600; }
+  .gauge-sub { font-size: .7rem; color: var(--muted); line-height: 1.3; min-height: 2.6em;
+               overflow-wrap: anywhere; }
+  .big { font-size: 2rem; font-weight: 600; line-height: 72px; height: 72px; }
+  .spark { width: 100%; height: 22px; display: block; margin-top: 2px; }
+  .spark polyline { fill: none; stroke: var(--state); stroke-width: 1.5;
+                    vector-effect: non-scaling-stroke; }
+  .spark polygon { fill: var(--state); opacity: .14; stroke: none; }
+  .bars { display: flex; gap: 3px; align-items: flex-end; height: 22px; width: 100%;
+          margin-top: 2px; }
+  .bars span { flex: 1; min-height: 2px; background: var(--state); border-radius: 2px 2px 0 0;
+               transition: height .8s ease; }
+  .drive { display: grid; grid-template-columns: 60px 1fr auto; gap: 10px; align-items: center;
+           font-size: .85rem; }
+  .drive + .drive { margin-top: 8px; }
+  .drive .gb { color: var(--muted); font-size: .75rem; white-space: nowrap; }
+  .drive .bar { height: 6px; border-radius: 3px; background: var(--track); overflow: hidden; }
+  .drive .bar i { display: block; height: 100%; background: var(--state); border-radius: 3px;
+                  transition: width .8s ease; }
+  @media (prefers-reduced-motion: reduce) {
+    .heart { animation: none; }
+    .arc .val, .bars span, .drive .bar i { transition: none; }
+  }
 </style>
 </head>
 <body>
@@ -82,6 +208,329 @@
     <a class="tile" style="--c:#fcbd36" href="https://zigbee2mqtt.anjos.fyi/"><img src="icons/zigbee2mqtt.svg" alt=""><span class="name">Zigbee2MQTT</span></a>
     <a class="tile" style="--c:#4c2165" href="https://homebridge.anjos.fyi/"><img src="icons/homebridge.svg" alt=""><span class="name">Homebridge</span></a>
   </div>
+
+  <div class="split">
+    <div id="pi" hidden>
+      <h2>Raspberry Pi</h2>
+      <div class="panel" id="pi-panel"></div>
+    </div>
+    <div id="status" hidden>
+      <h2>HTTPS status</h2>
+      <div class="panel" id="panel"></div>
+    </div>
+  </div>
 </main>
+<script>
+  const DAY = 86400000;
+  const UNITS = [["year", 365 * DAY], ["month", 30 * DAY], ["day", DAY],
+                 ["hour", 3600000], ["minute", 60000]];
+
+  // Two largest units, e.g. "2 days, 3 hours"
+  function span(ms) {
+    ms = Math.abs(ms);
+    const parts = [];
+    for (const [unit, size] of UNITS) {
+      const n = Math.floor(ms / size);
+      if (n > 0 && parts.length < 2) {
+        parts.push(`${n} ${unit}${n === 1 ? "" : "s"}`);
+        ms -= n * size;
+      } else if (parts.length) break;
+    }
+    return parts.join(", ") || "less than a minute";
+  }
+  const ago = (t, now) => `${span(now - t)} ago`;
+  const until = (t, now) => t > now ? `in ${span(t - now)}` : `${span(now - t)} ago`;
+
+  function el(tag, className, text) {
+    const e = document.createElement(tag);
+    if (className) e.className = className;
+    if (text !== undefined) e.textContent = text;
+    return e;
+  }
+
+  function times(rows) {
+    const dl = el("dl", "times");
+    for (const [label, value] of rows) {
+      dl.append(el("dt", "", label), el("dd", "", value));
+    }
+    return dl;
+  }
+
+  // Caddy renews with a third of the lifetime left
+  function certRow(cert, alertDays, now) {
+    const issued = Date.parse(cert.issued), expires = Date.parse(cert.expires);
+    const life = expires - issued;
+    const renews = issued + life * 2 / 3;
+    const pct = t => Math.min(100, Math.max(0, (t - issued) / life * 100));
+
+    const left = expires - now;
+    const [state, label] = left <= 0 ? ["critical", "Expired"]
+      : left <= alertDays * DAY ? ["critical", `Expires within ${alertDays} days`]
+      : now >= renews ? ["warning", "Renewal due"]
+      : ["good", "Valid"];
+
+    const row = el("div");
+    row.style.setProperty("--state", `var(--${state})`);
+
+    const head = el("div", "cert-head");
+    head.append(el("span", "cert-name", cert.name), el("span", "badge", label));
+
+    const meter = el("div", "meter");
+    meter.setAttribute("role", "img");
+    meter.setAttribute("aria-label",
+      `${Math.round(pct(now))}% of the certificate lifetime used`);
+    const zone = el("span", "zone");
+    zone.style.width = `${alertDays * DAY / life * 100}%`;
+    const fill = el("span", "fill"), dot = el("span", "now"), tick = el("span", "tick");
+    tick.style.left = `${pct(renews)}%`;
+    tick.title = "Expected renewal";
+    fill.style.width = dot.style.left = "0%";
+    meter.append(zone, fill, tick, dot);
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      fill.style.width = dot.style.left = `${pct(now)}%`;
+    }));
+
+    row.append(head, meter, times([
+      ["Last renewed", ago(issued, now)],
+      ["Next renewal (expected)", now >= renews ? "due now" : until(renews, now)],
+      ["Expires", until(expires, now)],
+    ]));
+    return row;
+  }
+
+  function imageRow(image, now) {
+    const state = image.update_available === true ? "warning"
+      : image.update_available === false ? "good" : "muted";
+    const label = image.update_available === true ? "Base image update available"
+      : image.update_available === false ? "Base image up to date"
+      : "Base image check failed";
+
+    const row = el("div", "image");
+    row.style.setProperty("--state", `var(--${state})`);
+    const head = el("div", "cert-head");
+    head.append(el("span", "cert-name", "Caddy image"), el("span", "badge", label));
+    const rows = [["Version", image.version], ["Rebuilt", ago(Date.parse(image.built), now)]];
+    if (image.update_available === true) {
+      rows.push(["To update", "./manage.sh update proxy"]);
+    }
+    row.append(head, times(rows));
+    return row;
+  }
+
+  async function refresh() {
+    let status;
+    try {
+      const response = await fetch("/status.json", { cache: "no-store" });
+      if (!response.ok) return;
+      status = await response.json();
+    } catch { return; }
+
+    const now = Date.now();
+    const panel = document.getElementById("panel");
+    panel.replaceChildren(
+      ...status.certificates.map(c => certRow(c, status.alert_days, now)),
+      imageRow(status.image, now),
+      el("p", "checked", `Checked ${ago(Date.parse(status.checked), now)}`),
+    );
+    document.getElementById("status").hidden = false;
+  }
+
+  refresh();
+  setInterval(refresh, 300000);
+
+  const SVG = "http://www.w3.org/2000/svg";
+  const ARC = "M 21.7 78.3 A 40 40 0 1 1 78.3 78.3";
+  const stateOf = (v, warn, crit) => v >= crit ? "critical" : v >= warn ? "warning" : "good";
+  const clamp = v => Math.min(100, Math.max(0, v));
+
+  function svg(tag, attrs = {}) {
+    const e = document.createElementNS(SVG, tag);
+    for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v);
+    return e;
+  }
+
+  function size(bytes, digits = 1) {
+    const units = ["B", "kB", "MB", "GB", "TB"];
+    let i = 0;
+    while (bytes >= 1000 && i < units.length - 1) { bytes /= 1000; i++; }
+    return `${bytes.toFixed(i ? digits : 0)} ${units[i]}`;
+  }
+
+  function arc() {
+    const root = svg("svg", { class: "arc", viewBox: "10 10 80 76", "aria-hidden": "true" });
+    const bg = svg("path", { d: ARC, class: "bg", pathLength: 100 });
+    const val = svg("path", { d: ARC, class: "val", pathLength: 100, "stroke-dasharray": "0 100" });
+    const text = svg("text", { x: 50, y: 58 });
+    root.append(bg, val, text);
+    return { root, val, text };
+  }
+
+  function sparkline() {
+    const root = svg("svg", { class: "spark", viewBox: "0 0 100 22",
+                              preserveAspectRatio: "none", "aria-hidden": "true" });
+    const area = svg("polygon"), line = svg("polyline");
+    root.append(area, line);
+    return { root, area, line };
+  }
+
+  function drawSpark(s, values, ceiling, points) {
+    if (values.length < 2) return;
+    const start = points - values.length;
+    const xy = values.map((v, i) =>
+      `${((start + i) / (points - 1) * 100).toFixed(1)},${(21 - Math.min(v, ceiling) / ceiling * 20).toFixed(1)}`);
+    s.line.setAttribute("points", xy.join(" "));
+    s.area.setAttribute("points", `${(start / (points - 1) * 100).toFixed(1)},22 ${xy.join(" ")} 100,22`);
+  }
+
+  // Built once, then only values change, so the arcs and bars can animate
+  let pi = null;
+
+  function tile(name, title) {
+    const root = el("div", "gauge");
+    const a = arc(), s = sparkline(), label = el("span", "gauge-label", name);
+    const sub = el("span", "gauge-sub");
+    root.title = title;
+    root.append(a.root, label, sub, s.root);
+    return { root, a, s, sub };
+  }
+
+  function buildPi() {
+    const head = el("div", "pi-head");
+    const heart = el("span", "heart");
+    const title = el("span", "pi-title", "raspberry");
+    const uptime = el("span", "pi-uptime");
+    const verdict = el("span", "badge");
+    head.append(heart, title, uptime, verdict);
+
+    const gauges = el("div", "gauges");
+    const cpu = tile("CPU", "Average CPU use over the last hour: arc for all cores, bars per core");
+    const memory = tile("Memory", "Memory in use, last 24 hours below");
+    const temp = tile("Temperature", "CPU temperature (the Pi throttles at 85 °C), last 24 hours below");
+    const io = tile("Disk I/O", "Busiest drive, average over the last hour, last 24 hours below");
+    const net = tile("Network", "Share of the eth0 link, average over the last hour, last 24 hours below");
+
+    const bars = el("div", "bars");
+    cpu.s.root.replaceWith(bars);
+
+    const apt = el("div", "gauge");
+    const aptCount = el("span", "big");
+    const aptLabel = el("span", "gauge-label", "APT updates");
+    const aptSub = el("span", "gauge-sub");
+    apt.title = "Packages with an update, from the host's apt lists";
+    apt.append(aptCount, aptLabel, aptSub);
+
+    gauges.append(cpu.root, memory.root, temp.root, io.root, net.root, apt);
+    const drives = el("div");
+    const facts = el("div");
+    const updated = el("p", "checked");
+    return { root: [head, gauges, drives, facts, updated], updated, heart, uptime, verdict, cpu, memory, temp,
+             io, net, bars, aptCount, aptSub, apt, drives, facts };
+  }
+
+  function setGauge(t, pct, state, text, sub) {
+    t.root.style.setProperty("--state", `var(--${state})`);
+    t.a.val.setAttribute("stroke-dasharray", `${clamp(pct).toFixed(1)} 100`);
+    t.a.text.textContent = text;
+    t.sub.textContent = sub;
+  }
+
+  function verdictOf(h) {
+    if (h.undervoltage) return ["critical", "Low power"];
+    if (h.temp >= 80) return ["critical", "Running hot"];
+    if (h.cpu >= 90 || h.memory.pct >= 90) return ["critical", "Struggling"];
+    if (h.temp >= 70) return ["warning", "Warm"];
+    if (h.cpu >= 75 || h.memory.pct >= 80 || h.io.pct >= 80) return ["warning", "Working hard"];
+    if (h.reboot_required) return ["warning", "Reboot needed"];
+    return ["good", h.cpu < 15 ? "Calm" : "Healthy"];
+  }
+
+  function renderPi(h, stale) {
+    if (!pi) {
+      pi = buildPi();
+      document.getElementById("pi-panel").replaceChildren(...pi.root);
+    }
+    const points = 24, column = i => h.history.map(row => row[i]);
+
+    const [state, label] = stale ? ["muted", "No recent data"] : verdictOf(h);
+    const panel = document.getElementById("pi-panel");
+    panel.style.setProperty("--state", `var(--${state})`);
+    pi.heart.style.setProperty("--beat", `${(1.8 - clamp(h.cpu) / 100 * 1.4).toFixed(2)}s`);
+    pi.uptime.textContent = `Up ${span(h.uptime * 1000)}`;
+    pi.verdict.textContent = label;
+
+    setGauge(pi.cpu, h.cpu, stateOf(h.cpu, 75, 90), `${Math.round(h.cpu)}%`,
+             `${(h.freq_mhz / 1000).toFixed(1)} GHz, load ${h.load[0].toFixed(2)}`);
+    pi.bars.style.setProperty("--state", `var(--${stateOf(h.cpu, 75, 90)})`);
+    if (pi.bars.children.length !== h.cores.length) {
+      pi.bars.replaceChildren(...h.cores.map(() => el("span")));
+    }
+    h.cores.forEach((v, i) => { pi.bars.children[i].style.height = `${Math.max(9, clamp(v))}%`; });
+
+    setGauge(pi.memory, h.memory.pct, stateOf(h.memory.pct, 80, 90),
+             `${Math.round(h.memory.pct)}%`, `${size(h.memory.used)} of ${size(h.memory.total)}`);
+    drawSpark(pi.memory.s, column(1), 100, points);
+
+    setGauge(pi.temp, (h.temp - 30) / 60 * 100, stateOf(h.temp, 70, 80), `${Math.round(h.temp)}°`,
+             h.fan_rpm === null ? "Celsius" : `fan ${h.fan_rpm} rpm`);
+    drawSpark(pi.temp.s, column(2).map(v => Math.max(0, v - 30)), 60, points);
+
+    setGauge(pi.io, h.io.pct, stateOf(h.io.pct, 80, 95), `${Math.round(h.io.pct)}%`,
+             `read ${size(h.io.read)}/s, write ${size(h.io.write)}/s`);
+    drawSpark(pi.io.s, column(3), Math.max(10, ...column(3)), points);
+
+    setGauge(pi.net, h.net.pct, stateOf(h.net.pct, 70, 90),
+             h.net.pct < 1 && h.net.pct > 0 ? "<1%" : `${Math.round(h.net.pct)}%`,
+             `down ${size(h.net.rx)}/s, up ${size(h.net.tx)}/s`);
+    drawSpark(pi.net.s, column(4), Math.max(5, ...column(4)), points);
+
+    const updates = h.apt.upgradable, security = h.apt.security;
+    pi.apt.style.setProperty("--state", "var(--good)");
+    pi.aptCount.textContent = updates;
+    pi.aptSub.textContent = updates === 0 ? "up to date"
+      : security ? `${security} security` : "ready to install";
+
+    pi.drives.replaceChildren(...h.drives.map(d => {
+      const pct = d.used / d.total * 100;
+      const row = el("div", "drive");
+      row.style.setProperty("--state", `var(--${stateOf(pct, 80, 90)})`);
+      const bar = el("span", "bar"), fill = el("i");
+      fill.style.width = `${pct}%`;
+      bar.append(fill);
+      row.append(el("span", "", d.name), bar,
+                 el("span", "gb", `${Math.round(pct)}% of ${size(d.total, 0)}`));
+      return row;
+    }));
+
+    const facts = [
+      ["Load (1, 5, 15 min)", h.load.map(v => v.toFixed(2)).join(", ")],
+      ["Power", h.undervoltage ? "Under-voltage detected" : "OK"],
+    ];
+    if (h.nvme_temp !== null) facts.push(["NVMe temperature", `${Math.round(h.nvme_temp)} °C`]);
+    if (h.reboot_required) facts.push(["Reboot", "Required by an update"]);
+    pi.facts.replaceChildren(times(facts));
+    pi.facts.firstChild.style.marginTop = "0";
+    pi.updated.textContent = `Hourly averages, updated ${ago(Date.parse(h.time), Date.now())}`;
+
+    document.getElementById("pi").hidden = false;
+  }
+
+  let lastHealth = null;
+
+  async function refreshPi() {
+    if (document.hidden) return;
+    try {
+      const response = await fetch("/health.json", { cache: "no-store" });
+      if (!response.ok) throw new Error(response.statusText);
+      lastHealth = await response.json();
+    } catch {
+      if (!lastHealth) return;
+    }
+    renderPi(lastHealth, Date.now() - Date.parse(lastHealth.time) > 2.5 * 3600000);
+  }
+
+  refreshPi();
+  setInterval(refreshPi, 300000);
+  document.addEventListener("visibilitychange", refreshPi);
+</script>
 </body>
 </html>

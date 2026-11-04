@@ -25,10 +25,53 @@ services:
       timeout: 2s
     volumes:
       - proxy_caddy:/data
+      - proxy_status:/status:ro
       - ./caddy:/etc/caddy:ro
     environment:
       - TZ=${TZ}
       - CF_API_TOKEN=${CF_API_TOKEN}
+  # Hourly certificate, image and Raspberry Pi status for the index page, plus
+  # the certificate expiry alert. Mounts only what status.sh reads: never mount
+  # / or /run, which would expose the docker socket. See status/status.sh.
+  status:
+    build: ./status
+    container_name: status
+    restart: unless-stopped
+    hostname: status
+    labels:
+      - diun.enable=false  # locally built image: see status/Dockerfile
+    depends_on:
+      - caddy
+    command: sh /app/status.sh
+    cap_drop:
+      - ALL
+    cap_add:
+      - SYS_CHROOT  # apt runs in /host
+    security_opt:
+      - no-new-privileges:true
+    healthcheck:
+      test: test -n "$$(find /status/health.json -mmin -130)"
+      interval: 60s
+      retries: 5
+      start_period: 60s
+      timeout: 2s
+    volumes:
+      - proxy_status:/status
+      - ./status:/app:ro
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /usr:/host/usr:ro
+      - /etc/apt:/host/etc/apt:ro
+      - /var/lib/apt:/host/var/lib/apt:ro
+      - /var/lib/dpkg:/host/var/lib/dpkg:ro
+      - /dev/null:/host/dev/null
+      - /media:/host/media:ro,rslave
+      - /backup:/host/backup:ro,rslave
+    environment:
+      - TZ=${TZ}
+      - ALERT_DAYS=7
+      - PUSHOVER_TOKEN=${DIUN_NOTIF_PUSHOVER_TOKEN}
+      - PUSHOVER_USER=${DIUN_NOTIF_PUSHOVER_RECIPIENT}
 # Join the other stacks' networks to reach their services by hostname
 networks:
   media:
@@ -40,3 +83,10 @@ networks:
 volumes:
   proxy_caddy:
     external: true
+  # Rebuilt by status after a restart: RAM only, so no backup entry
+  proxy_status:
+    name: proxy_status
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
+      o: size=1m
