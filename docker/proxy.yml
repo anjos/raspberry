@@ -1,11 +1,13 @@
 services:
-  # HTTPS front door for the web UIs (https://<service>.raspberry.local),
-  # certificates issued by Caddy's own private CA. See caddy/Caddyfile.
+  # HTTPS front door for the web UIs (https://<service>.anjos.fyi), with Let's
+  # Encrypt certificates from the DNS-01 challenge. See caddy/Caddyfile.
   caddy:
-    image: caddy:latest
+    build: ./caddy
     container_name: caddy
     restart: unless-stopped
     hostname: caddy
+    labels:
+      - diun.enable=false  # locally built image: see caddy/Dockerfile
     networks:
       - media
       - smarthome
@@ -26,6 +28,7 @@ services:
       - ./caddy:/etc/caddy:ro
     environment:
       - TZ=${TZ}
+      - CF_API_TOKEN=${CF_API_TOKEN}
 # Join the other stacks' networks to reach their services by hostname
 networks:
   media:
