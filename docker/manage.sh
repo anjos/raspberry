@@ -63,6 +63,23 @@ pull() {
     done
 }
 
+build() {
+    local params=("$@")
+
+    if [[ -z "${params}" ]]; then
+        params=(*.yml)
+    fi
+
+    for k in "${params[@]}"; do
+        local stack=$(_stackname "${k}")
+        local file=$(_filename "${k}")
+        echo "Building images for stack \`${stack}\` (from \`${file}\`)..."
+        # --no-cache: otherwise new plugin versions hide behind cached layers.
+        # Stacks without a `build:` section do nothing here.
+        docker compose --file "${file}" --project-name "${stack}" build --pull --no-cache
+    done
+}
+
 update() {
     local params=("$@")
 
@@ -71,7 +88,8 @@ update() {
     fi
 
     for k in "${params[@]}"; do
-        echo "Updating stack \`${stack}\` (from \`${file}\`)..."
+        echo "Updating stack \`$(_stackname "${k}")\` (from \`$(_filename "${k}")\`)..."
+        build "${k}" # before down: building takes minutes
         down "${k}"
         pull "${k}"
         up "${k}"
@@ -113,6 +131,7 @@ ps() {
 
 clean() {
     docker -l info image prune --force
+    docker builder prune --force
 }
 
 help() {
@@ -121,12 +140,13 @@ help() {
     echo "Commands:"
     echo "  help                                - prints this help"
     echo "  ls                                  - list running stacks"
-    echo "  clean                               - remove all dangling images"
+    echo "  clean                               - remove all dangling images and build cache"
     echo "  ps [<(yml|stack)>+]                 - lists running services in a stack"
     echo "  up [<(yml|stack)>+]                 - starts all stacks or those listed"
     echo "  down [<(yml|stack)>+]               - stops all stacks or those listed"
     echo "  pull [<(yml|stack)>+]               - updates latest images for stacks"
-    echo "  update [<(yml|stack)>+]             - pulls and re-launch stacks"
+    echo "  build [<(yml|stack)>+]              - rebuilds locally built images from scratch"
+    echo "  update [<(yml|stack)>+]             - rebuilds, pulls and re-launch stacks"
     echo "  log <(yml|stack)> <image> [(opts)]  - shows log for a particular image"
     echo "  tail <(yml|stack)> <image> [(opts)] - tails log for a particular image"
     echo ""
