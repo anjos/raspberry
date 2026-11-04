@@ -13,14 +13,15 @@ that turns out to be wrong.
 Configuration for a home server: a Raspberry Pi 5 (`raspberry`, arm64,
 192.168.1.27) on the home intranet. **No service is exposed to the internet,
 and that is intentional.** Never add port forwarding, tunnels (cloudflared,
-tailscale funnel, ngrok), reverse proxies with public certificates, or
-anything else that makes a service reachable from outside the LAN.
+tailscale funnel, ngrok), or anything else that makes a service reachable from
+outside the LAN. Public certificates are fine only through the DNS-01 challenge,
+which needs no inbound access.
 
 | Directory     | Contents                                                        |
 | ------------- | --------------------------------------------------------------- |
 | `docker/`     | Docker Compose stacks (one `<stack>.yml` per stack) + `manage.sh` |
 | `docker/zigbee2mqtt/` | Zigbee2MQTT config/automations bind-mounted into the container (see its README) |
-| `docker/caddy/` | Caddyfile, service index page, mDNS names + their systemd unit (HTTPS) |
+| `docker/caddy/` | Caddyfile, Dockerfile (Caddy + DNS plugin), service index page (HTTPS) |
 | `scenes/`     | Zigbee light scenes + `reset.py` (pixi project)                   |
 | `firmware/`   | Zigbee dongle firmware + flashing tasks (pixi project)            |
 
@@ -71,37 +72,34 @@ Verify live with `ss -tlnpu` and `docker ps --format '{{.Names}}\t{{.Ports}}'`.
 
 ### HTTPS (`proxy` stack, caddy)
 
-- `https://raspberry.local` is a tile index (`docker/caddy/site/index.html`), and
-  each web UI is at `https://<service>.raspberry.local`. The old
-  `http://raspberry.local:<port>` URLs still work.
-- Certificates come from Caddy's **private CA** (`local_certs`). The root is valid
-  until 2036 and its key lives in the `proxy_caddy` volume (backed up). Losing it
-  means every device must trust a new root. Each device trusts the root once,
-  from `raspberry.local/ca.crt` (served on http and https, because browsers
-  upgrade http links): on iOS install the profile, then enable it
-  under General -> About -> Certificate Trust Settings. On a Mac, use
-  `security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain`.
-  Import into the **login** or **System** keychain only: importing into
-  iCloud or Local Items fails with error -25294 (no such keychain), because
-  that store doesn't accept certificates and trust settings don't sync anyway.
-  Let's Encrypt is impossible for `.local`.
+- `https://anjos.fyi` is a tile index (`docker/caddy/site/index.html`), and each
+  web UI is at `https://<service>.anjos.fyi`. The `http://raspberry.local:<port>`
+  URLs still work.
+- Certificates are public **Let's Encrypt** ones, obtained with the **DNS-01**
+  challenge, so no device setup and no inbound port is needed. Caddy creates the
+  TXT records through the Cloudflare API and renews on its own. HTTP-01 and
+  TLS-ALPN need inbound access, so never use them. Issued hostnames land in public
+  Certificate Transparency logs, so keep to the wildcard: per-service certificates
+  would publish every service name.
+- The domain `anjos.fyi` is registered and hosted at Cloudflare, with two **DNS only
+  (grey cloud)** records: `@` and `*` -> `192.168.1.27`. They're public, but a private
+  address leads nowhere from outside the LAN. They rely on the Pi keeping that
+  address through a DHCP reservation on the router (MAC `d8:3a:dd:de:7e:76`). If the
+  address changes, edit both records.
+- `CF_API_TOKEN` (`docker/.envrc`) is limited to the `anjos.fyi` zone, with Zone Read
+  and DNS Edit. `docker compose config` prints it, so always pass `--quiet`.
+  Cloudflare's `user/tokens/verify` returns false for it even though it works.
+- Caddy is a local image (`docker/caddy/Dockerfile`), since the DNS plugin isn't in
+  `caddy:latest`. diun can't track it (`diun.enable=false`), so update it now and
+  then: `docker compose -f proxy.yml -p proxy build --pull && ./manage.sh up proxy`.
 - **Services never talk to each other through the https names.** Use
   `http://<container>:<port>` (or `localhost`/`raspberry` from host-network
-  containers). Otherwise each container would need the private CA in its own
-  trust store. The https names are for people only.
-- The subdomains are published over mDNS by `docker/caddy/mdns-names.service`
-  (`avahi-publish -a -R` for each line of `docker/caddy/mdns-names`; needs
-  `avahi-utils`). `/etc/avahi/hosts` doesn't work for this: it fails with "Local
-  name collision" because the Pi's own IP already has a PTR record. Apple devices
-  resolve multi-label `.local` names; Linux clients using nss-mdns may need
-  `/etc/mdns.allow`.
-- Short aliases redirect (302) to the full name, so each app keeps one origin:
-  `rb.local` -> `raspberry.local`, and `<alias>.raspberry.local` /
-  `<name|alias>.rb.local` -> `<name>.raspberry.local`. The aliases are qbt,
-  radr, sonr, chaptr, prowlr, z2m and hb (plex has none). Each alias needs its
-  own redirect block in the Caddyfile and lines in `mdns-names`.
-- To add a UI: add a Caddyfile site block, a line in `mdns-names`
-  (`sudo systemctl restart mdns-names`), a tile in `index.html` (SVG from
+  containers). The https names are for people only.
+- Short aliases redirect (302) to the full name, so each app keeps one origin. The
+  aliases are qbt, radr, sonr, chaptr, prowlr, z2m and hb (plex has none). Unknown
+  `*.anjos.fyi` names get the connection closed.
+- To add a UI: add `@name host` + `handle @name` lines to the `*.anjos.fyi` block
+  (no DNS change, the wildcard covers it), a tile in `index.html` (SVG from
   homarr-labs/dashboard-icons into `site/icons/`, `--c` set to the icon's dominant
   brand colour), then
   `docker exec caddy caddy reload --config /etc/caddy/Caddyfile`. The caddy
@@ -110,11 +108,6 @@ Verify live with `ss -tlnpu` and `docker ps --format '{{.Names}}\t{{.Ports}}'`.
 - Radarr, Sonarr and Prowlarr ignore `X-Forwarded-Proto` and redirect to
   `http://`, so their Caddyfile blocks rewrite `Location` with
   `header_down Location ^http:// https://`. Chaptarr doesn't need it.
-- iOS: an installed but not-yet-trusted profile makes the `*.raspberry.local` tiles
-  do nothing at all, with no warning. Caddy logs `tls: unknown certificate`
-  (visible only with `debug` in the global options). The page for
-  `raspberry.local` itself can still load through a remembered "visit anyway"
-  exception. Fix: turn the root on in Certificate Trust Settings.
 - `443/udp` must be published: caddy advertises HTTP/3 (`alt-svc: h3`) and
   browsers remember that for 30 days.
 - A caddy reload or restart drops the websockets of the Homebridge and
@@ -124,7 +117,7 @@ Verify live with `ss -tlnpu` and `docker ps --format '{{.Names}}\t{{.Ports}}'`.
 
 ### Secrets
 
-`docker/.envrc` holds secrets (Plex claim, Pushover tokens) and is
+`docker/.envrc` holds secrets (Plex claim, Pushover tokens, Cloudflare API token) and is
 gitignored. Never commit it, copy its values into tracked files, or print them.
 Application credentials live in the owner's personal notes; ask for them
 rather than digging them out of app databases.
@@ -158,7 +151,7 @@ The *arrs mount `/media:/media` and qbittorrent mounts
   downloads" on and deletes the torrent after import. Don't switch the action
   back to "Remove (with content)": the *arrs refuse it, and it races imports.
 - Each *arr's Settings -> General -> Application URL is its https name
-  (e.g. `https://radarr.raspberry.local`), so links in Pushover notifications
+  (e.g. `https://radarr.anjos.fyi`), so links in Pushover notifications
   open the https UI.
 - Chaptarr (a Readarr fork, `chaptarr/chaptarr`, not linuxserver) uses API
   `/api/v1`, while radarr/sonarr use `/api/v3`. Its quality profile "E-Book"

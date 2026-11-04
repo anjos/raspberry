@@ -79,8 +79,8 @@ docker exec rsnapshot ls /data/                                  # new volume li
 
 - Configure the app (API where possible). Any credentials come from the
   owner; never read them out of other apps' databases, and never commit them.
-- If it has a web UI, publish it over HTTPS: Caddyfile site, `mdns-names` line,
-  index tile (see AGENTS.md "HTTPS"). If it's an *arr, set its Application URL
+- If it has a web UI, publish it over HTTPS: `handle` in the `*.anjos.fyi`
+  Caddyfile block, index tile (see AGENTS.md "HTTPS"). If it's an *arr, set its Application URL
   to the https name. Wire it to other services by `http://<container>:<port>`,
   never by the https name.
 - Commit with a scope prefix, e.g. `media: add <app>`.
