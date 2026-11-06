@@ -151,6 +151,14 @@ The *arrs mount `/media:/media` and qbittorrent mounts
   ratio 0.1 / 360 min with action **Stop**. Each *arr has "Remove completed
   downloads" on and deletes the torrent after import. Don't switch the action
   back to "Remove (with content)": the *arrs refuse it, and it races imports.
+- **Fail Downloads**: every radarr and sonarr indexer has `failDownloads: [0,1]`
+  (Executables + Potentially Dangerous). Without it, a fake release (`<title>.exe`)
+  stays in the queue at `importPending` forever with "Caution: Found executable file",
+  even though qBittorrent's Pushover says it finished. With it, the release is failed,
+  blocklisted and replaced. Prowlarr doesn't manage this field, but a **newly added
+  indexer starts empty**, so set it there too. Chaptarr has no such setting. Don't add
+  `*.exe` to qBittorrent's excluded file names: it would likely leave an empty "complete"
+  torrent, which the check can't see. Sonarr can grab fakes of unaired episodes.
 - Each *arr's Settings -> General -> Application URL is its https name
   (e.g. `https://radarr.anjos.fyi`), so links in Pushover notifications
   open the https UI.

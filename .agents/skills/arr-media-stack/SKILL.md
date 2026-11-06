@@ -81,6 +81,12 @@ username/password from the owner, then `/api/v2/app/preferences`,
 - Import "matched a different book" (bad catalog titles): `GET manualimport?downloadId=`,
   then `command ManualImport` with files `{path,authorId,bookId,editionId
   (numeric, from edition?bookId=),quality,downloadId,disableReleaseSwitching:true}`.
+- Queue item at `importPending` with "Caution: Found executable file": a fake release.
+  Never run the file. Check `outputPath`, `file <path>` and the episode's `airDateUtc`.
+  Each radarr/sonarr indexer should have `failDownloads: [0,1]`, which fails it
+  automatically. Set it on new indexers: `GET indexer/<id>`, change the field, then
+  `PUT indexer/<id>?forceSave=true` (the query string skips test failures). Fallback:
+  `DELETE queue/<id>?removeFromClient=true&blocklist=true`.
 - New chaptarr instances start with authentication "None". The owner sets
   the login on first UI visit.
 - Hostnames inside the `media_network` bridge: `qbittorrent`, `prowlarr`,
