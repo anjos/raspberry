@@ -169,6 +169,18 @@ The *arrs mount `/media:/media` and qbittorrent mounts
 
 Use the `arr-media-stack` skill for API access and troubleshooting.
 
+### Homebridge (config in the `smarthome_homebridge` volume, not in this repo)
+
+- The Office Monitor (Samsung M8 `LS32BM801UUXEN`, Tizen, on Wi-Fi at `192.168.1.9`, MAC
+  `54:44:A3:81:F2:AE`) is controlled over the LAN by `homebridge-samsung-tizen`, which needs
+  that address fixed by a DHCP reservation. It replaced `homebridge-smartthings-tv` on
+  2026-11-06, because SmartThings API access is now paid ($4.99/month) and PATs expire on
+  2026-12-15. Don't reintroduce a SmartThings cloud integration: the Tizen plugin's optional
+  SmartThings features would need that paid plan too.
+- The plugin doesn't support child bridges: leave that option off, or the monitor won't appear
+  in Home. Its accessory is external, so it's paired in the Home app on its own, and changing
+  the plugin's config restarts all of Homebridge, briefly dropping HomeKit lights.
+
 ## Workflow rules
 
 - Validate before deploying:
