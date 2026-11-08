@@ -22,7 +22,7 @@ which needs no inbound access.
 | `docker/`     | Docker Compose stacks (one `<stack>.yml` per stack) + `manage.sh` |
 | `docker/zigbee2mqtt/` | Zigbee2MQTT config/automations bind-mounted into the container (see its README) |
 | `docker/status/` | Hourly status job for the index page (certificates, Pi health, alert) |
-| `docker/caddy/` | Caddyfile, Dockerfile (Caddy + DNS plugin), service index page (HTTPS) |
+| `docker/caddy/` | Caddyfile and service index page (HTTPS) |
 | `scenes/`     | Zigbee light scenes + `reset.py` (pixi project)                   |
 | `firmware/`   | Zigbee dongle firmware + flashing tasks (pixi project)            |
 
@@ -90,19 +90,22 @@ Verify live with `ss -tlnpu` and `docker ps --format '{{.Names}}\t{{.Ports}}'`.
 - `CF_API_TOKEN` (`docker/.envrc`) is limited to the `anjos.fyi` zone, with Zone Read
   and DNS Edit. `docker compose config` prints it, so always pass `--quiet`.
   Cloudflare's `user/tokens/verify` returns false for it even though it works.
-- Caddy is a local image (`docker/caddy/Dockerfile`), since the DNS plugin isn't in
-  `caddy:latest`. diun can't track it (`diun.enable=false`), so `./manage.sh update`
-  rebuilds it (`./manage.sh build` alone doesn't deploy). It builds with `--no-cache`,
-  because cached layers would hide new plugin versions, so every update recreates
-  caddy and drops the UIs for a moment. Run it with no arguments or for `proxy`.
+- `caddy:latest` lacks the Cloudflare DNS module, so caddy runs
+  `ghcr.io/caddybuilds/caddy-cloudflare:latest`, a third-party build (MIT, GitHub
+  Actions) of the official image plus `caddy-dns/cloudflare`. It is rebuilt within about
+  a day of a Caddy, module or base image release, diun reports it like any other
+  image, and `./manage.sh update proxy` just pulls it. It holds the TLS keys and
+  `CF_API_TOKEN`, which is one reason the token is scoped to DNS edits on one zone.
+  If the project stalls or can't be trusted, go back to a local build: a two-stage
+  Dockerfile (`caddy:builder` running `xcaddy build --with github.com/caddy-dns/cloudflare`,
+  then copying `/usr/bin/caddy` into `caddy:latest`), `diun.enable=false`, and
+  `--no-cache` builds (see git history before 2026-11-08).
 - The `status` container (a small Alpine image, `docker/status/`) runs `status.sh`
   hourly and writes `status.json` and `health.json` to the `proxy_status` volume for the
   index page, which reads them at `/status.json` and `/health.json`. `proxy_status` is
   tmpfs (1 MB, compose-managed, not backed up), so history restarts with the container.
 - Certificates are read from what caddy serves, so the container needs no access
-  to `proxy_caddy` and its keys. Caddy's `/build.json`, baked into its image, gives
-  the build time and version; "update available" compares that date with the
-  `caddy:latest` push on Docker Hub, so a republished image can flag with no real change.
+  to `proxy_caddy` and its keys.
 - A Pushover alert goes out, once a day, when a certificate has under `ALERT_DAYS` (7)
   left, or none can be read. Caddy renews at about two thirds of the lifetime, so an
   alert means renewal has been failing for weeks.

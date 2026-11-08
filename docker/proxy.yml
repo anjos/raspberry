@@ -2,12 +2,12 @@ services:
   # HTTPS front door for the web UIs (https://<service>.anjos.fyi), with Let's
   # Encrypt certificates from the DNS-01 challenge. See caddy/Caddyfile.
   caddy:
-    build: ./caddy
+    # Prebuilt with the Cloudflare DNS module (not in caddy:latest), by a third
+    # party: see AGENTS.md
+    image: ghcr.io/caddybuilds/caddy-cloudflare:latest
     container_name: caddy
     restart: unless-stopped
     hostname: caddy
-    labels:
-      - diun.enable=false  # locally built image: see caddy/Dockerfile
     networks:
       - media
       - smarthome
@@ -30,7 +30,7 @@ services:
     environment:
       - TZ=${TZ}
       - CF_API_TOKEN=${CF_API_TOKEN}
-  # Hourly certificate, image and Raspberry Pi status for the index page, plus
+  # Hourly certificate and Raspberry Pi status for the index page, plus
   # the certificate expiry alert. Mounts only what status.sh reads: never mount
   # / or /run, which would expose the docker socket. See status/status.sh.
   status:

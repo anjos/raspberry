@@ -126,8 +126,6 @@
            gap: 8px 16px; margin: 12px 0 0; }
   .times dt { font-size: .75rem; color: var(--muted); }
   .times dd { margin: 0; font-size: .9rem; }
-  .image { border-top: 1px solid var(--line); padding-top: 16px; }
-  .image code { font-size: .85em; overflow-wrap: anywhere; }
   .checked { margin: 0; font-size: .75rem; color: var(--muted); }
 
   .split { display: grid; gap: 0 16px; align-items: start;
@@ -298,25 +296,6 @@
     return row;
   }
 
-  function imageRow(image, now) {
-    const state = image.update_available === true ? "warning"
-      : image.update_available === false ? "good" : "muted";
-    const label = image.update_available === true ? "Base image update available"
-      : image.update_available === false ? "Base image up to date"
-      : "Base image check failed";
-
-    const row = el("div", "image");
-    row.style.setProperty("--state", `var(--${state})`);
-    const head = el("div", "cert-head");
-    head.append(el("span", "cert-name", "Caddy image"), el("span", "badge", label));
-    const rows = [["Version", image.version], ["Rebuilt", ago(Date.parse(image.built), now)]];
-    if (image.update_available === true) {
-      rows.push(["To update", "./manage.sh update proxy"]);
-    }
-    row.append(head, times(rows));
-    return row;
-  }
-
   async function refresh() {
     let status;
     try {
@@ -329,7 +308,6 @@
     const panel = document.getElementById("panel");
     panel.replaceChildren(
       ...status.certificates.map(c => certRow(c, status.alert_days, now)),
-      imageRow(status.image, now),
       el("p", "checked", `Checked ${ago(Date.parse(status.checked), now)}`),
     );
     document.getElementById("status").hidden = false;

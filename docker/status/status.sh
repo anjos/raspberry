@@ -1,7 +1,7 @@
 #!/bin/sh
 # Hourly status for the index page, plus a Pushover alert (at most once a day)
 # when a certificate is within ALERT_DAYS of expiry. Writes to /status:
-#   status.json: certificates as served by caddy, and caddy image updates
+#   status.json: certificates as served by caddy
 #   health.json: CPU, memory, I/O and network (averages since the last sample),
 #                temperatures, drives and APT updates, with a day of history
 # The first run comes shortly after start, so the page isn't empty after a restart.
@@ -11,7 +11,6 @@ h=/host
 out=/status
 site=anjos.fyi
 names="${site} radarr.${site}"  # the apex and wildcard certificates
-latest=https://hub.docker.com/v2/repositories/library/caddy/tags/latest
 alert_days=${ALERT_DAYS:-7}
 interval=3600
 first=30
@@ -55,18 +54,8 @@ check_https() {
             critical="${critical} ${subject}"
     done
 
-    # Built by caddy/Dockerfile. Base images are compared by date.
-    build=$(curl -fsS -m 20 "https://${site}/build.json")
-    [ -n "${build}" ] || build='{}'
-    pushed=$(curl -fsS -m 20 "${latest}" | jq -r '.tag_last_pushed // empty')
-
-    printf '%s' "${list}" | jq -s --argjson build "${build}" --arg pushed "${pushed}" \
-        --argjson days "${alert_days}" \
-        'def epoch: sub("\\.[0-9]+Z$"; "Z") | fromdate;
-         {checked: (now | todate), alert_days: $days, certificates: .,
-          image: ($build + {update_available:
-              (if $pushed == "" or $build.built == null then null
-               else ($pushed | epoch) > ($build.built | epoch) end)})}' \
+    printf '%s' "${list}" | jq -s --argjson days "${alert_days}" \
+        '{checked: (now | todate), alert_days: $days, certificates: .}' \
         >"${out}/status.tmp" && mv "${out}/status.tmp" "${out}/status.json"
 
     if [ -z "${list}" ]; then
