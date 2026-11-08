@@ -169,6 +169,30 @@ The *arrs mount `/media:/media` and qbittorrent mounts
 - Each *arr's Settings -> General -> Application URL is its https name
   (e.g. `https://radarr.anjos.fyi`), so links in Pushover notifications
   open the https UI.
+- **No Dolby Vision**: Plex for Apple TV in the living room never starts a Dolby Vision
+  file. It spins forever (4K and 1080p, direct play or not), while HDR10 and SDR play fine.
+  Radarr and Sonarr both have custom formats "Dolby Vision" (release-title regex
+  `DV|DoVi|Dolby Vision`) and "AV1" (the Apple TV has no AV1 decoder), each scored -10000
+  in every quality profile, so such releases are never grabbed. The rules only see release
+  titles: a release whose name doesn't mention DV can still contain it (check `DOVIPresent`
+  in Plex after import). Groups caught doing that get a release-group spec in the "Hidden
+  Dolby Vision" format (also -10000). So far that's `CYBER`: its "HEVC.HDR" 4K releases
+  carry DV, and Italian is the default track. Existing DV files score -10000 too, so Radarr
+  replaces them with any non-DV release of the same quality. Fix playback by redownloading,
+  not by remuxing. The Pi can't transcode 4K video in real time, so Plex can't work around it.
+- **Size limits** (Settings -> Quality, MB per minute of runtime, min/max, the same in Radarr
+  and Sonarr): WEB-1080p 12/100, Bluray-1080p 30/200, WEB-2160p 40/300, Bluray-2160p 80/350,
+  Remux-1080p 64/200, Remux-2160p 120/350 (2026-11-08); 1 MB/min is about 0.133 Mbps. The
+  WEB-2160p max leaves room for Apple TV+/iTunes 4K (30-40 Mbps). HDTV and Raw-HD keep the apps'
+  defaults. Remux and BR-DISK aren't allowed in any profile in either app. Sonarr needs
+  min <= preferred <= max, so its Remux-2160p preferred size is 120. The minimums stop the
+  apps from treating YIFY-sized encodes as equal to real Blu-ray encodes: without them, a
+  "same quality" search picked 2 GB encodes to replace 20 GB Blu-rays. The maximums keep
+  out full remuxes (~50-80 GB for 4K), which usually carry DV too. After a mass search,
+  still check the queue before imports.
+- A manual grab that Radarr reports as "Not an upgrade" (e.g. WEB below Blu-ray) has to be
+  imported with `ManualImport`. Such an import copies the file (no hardlink), so the
+  download stays until the torrent is removed.
 - Chaptarr (a Readarr fork, `chaptarr/chaptarr`, not linuxserver) uses API
   `/api/v1`, while radarr/sonarr use `/api/v3`. Its quality profile "E-Book"
   allows EPUB only, since the owner reads in Apple Books (EPUB/PDF only). There is
