@@ -222,6 +222,10 @@ Use the `arr-media-stack` skill for API access and troubleshooting.
   or `Lightbulb`. The simplest way to get it is to run the UI's own client
   (`homebridge-config-ui-x/node_modules/@homebridge/hap-client`, `getAllServices()`) inside the
   container, which works because Homebridge runs with `-I`. Back up the file before editing it.
+- The Home app (iOS 16 and later) shows no tile for an accessory that can't be controlled. The
+  thermometers (temperature + humidity, exposed by `homebridge-z2m`) appear only in the Climate
+  summary at the top of the Home view and in each room's status buttons. They have no "Show in
+  Home View" toggle, and nothing on the Pi changes that.
 - A per-room `television` accessory (scenes as inputs) was considered and rejected: HomeKit
   shows one TV per bridge (8 pairings), Siri can't pick inputs, and wall-switch presses never
   reach MQTT (automations run inside Z2M), so the shown scene would go stale. mqttthing's grouped
