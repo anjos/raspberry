@@ -113,9 +113,13 @@ Verify live with `ss -tlnpu` and `docker ps --format '{{.Names}}\t{{.Ports}}'`.
   reads. **Never mount `/` or `/run` into it**: a read-only mount still lets a process
   connect to `/run/docker.sock`, and `/` would expose `.envrc` and SSH keys. Gauges
   are averages since the previous sample. `/host` is just enough of a root to run the
-  host's `apt list --upgradable`, which only reads the lists kept fresh by
-  `apt-daily.timer`. `/host/sys/class/net/*/statistics` shows the host's interfaces;
-  `/host/proc/net` wouldn't.
+  host's `apt list --upgradable`, which only reads the host's package lists (never
+  give the container write access to refresh them). `apt-daily.timer` refreshes them
+  only if `APT::Periodic::Update-Package-Lists "1";` is set (host file
+  `/etc/apt/apt.conf.d/10periodic`). Raspberry Pi OS doesn't set it, and without it
+  the timer runs as a no-op and the page shows 0 updates until a manual `apt update`.
+  `/host/sys/class/net/*/statistics` shows the host's interfaces; `/host/proc/net`
+  wouldn't.
 - Reboot detection compares the running kernel with the newest installed one of the
   same flavour. `vcgencmd get_throttled` needs the host: past throttling isn't shown.
 
