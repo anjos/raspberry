@@ -569,18 +569,7 @@ entrance/wall/switch 1 and 3/ON:
     entity: entrance/wall/switch
     action: press_1_and_3  # top buttons
   action:
-    - entity: Entrance
-      payload: {"scene_recall": 3}
-    - entity: Office
-      payload: {"scene_recall": 3}
-    - entity: David
-      payload: {"scene_recall": 3}
-    - entity: A2
-      payload: {"scene_recall": 3}
-    - entity: Living room
-      payload: {"scene_recall": 3}
-    - entity: Kitchen
-      payload: {"scene_recall": 3}
+    - scene: Welcome home  # scenes.yaml
 
 entrance/wall/switch 2 and 4/OFF:
   active: true
@@ -588,22 +577,7 @@ entrance/wall/switch 2 and 4/OFF:
     entity: entrance/wall/switch
     action: press_2_and_4  # bottom buttons
   action:
-    - entity: Entrance
-      payload: {"scene_recall": 1}
-    - entity: Office
-      payload: {"scene_recall": 1}
-    - entity: David
-      payload: {"scene_recall": 1}
-    - entity: A2
-      payload: {"scene_recall": 1}
-    - entity: Living room
-      payload: {"scene_recall": 1}
-    - entity: Kitchen
-      payload: {"scene_recall": 1}
-    - entity: Balcony
-      payload: {"scene_recall": 1}
-    - entity: Shower room
-      payload: {"scene_recall": 1}
+    - scene: Lights out  # scenes.yaml
 
 entrance/wall/switch 1/ON:
   active: true

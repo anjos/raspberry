@@ -20,7 +20,7 @@ which needs no inbound access.
 | Directory     | Contents                                                        |
 | ------------- | --------------------------------------------------------------- |
 | `docker/`     | Docker Compose stacks (one `<stack>.yml` per stack) + `manage.sh` |
-| `docker/zigbee2mqtt/` | Zigbee2MQTT config/automations bind-mounted into the container (see its README) |
+| `docker/zigbee2mqtt/` | Zigbee2MQTT config/automations/house-wide scenes bind-mounted into the container (see its README) |
 | `docker/status/` | Hourly status job for the index page (certificates, Pi health, alert) |
 | `docker/caddy/` | Caddyfile and service index page (HTTPS) |
 | `scenes/`     | Zigbee light scenes + `reset.py` (pixi project)                   |
@@ -187,6 +187,45 @@ Use the `arr-media-stack` skill for API access and troubleshooting.
 - The plugin doesn't support child bridges: leave that option off, or the monitor won't appear
   in Home. Its accessory is external, so it's paired in the Home app on its own, and changing
   the plugin's config restarts all of Homebridge, briefly dropping HomeKit lights.
+- Room scenes reach Home as one momentary switch per scene ("Office Reading"), made with
+  `homebridge-mqttthing` (`accessory` entries, not a platform). `homebridge-z2m` has no scene
+  support. All of them share the child bridge `0E:4B:DB:41:85:87` on port 33817 (paired in Home
+  on its own), so editing them restarts only that bridge. They're generated from `scenes/*.yml` by
+  `pixi run homekit --apply` in `scenes/`, which backs up `config.json` to `backups/` and replaces
+  only the `mqttthing` entries. Re-run it after adding, removing or reordering scenes, then restart
+  that child bridge. Each switch publishes `{"scene_recall": N}` (N = position in the file, as
+  `reset.py` stores them) and turns itself off after 1 s. It has no `offValue` on purpose: the
+  auto-off then publishes nothing. Never add one, or the auto-off would send it. Names make the
+  HomeKit IDs, so a renamed scene is a new accessory whose room must be set again.
+- House-wide scenes ("Welcome home", "Lights out") live in `docker/zigbee2mqtt/scenes.yaml`,
+  the automations extension's scene file, bind-mounted like `automations.yaml`. The entrance
+  switch runs them with `- scene: <name>` when both top buttons (`press_1_and_3`) or both
+  bottom buttons (`press_2_and_4`) are pushed together. `homekit.py` turns each one into a
+  switch that publishes `execute` to `zigbee2mqtt-scenes/<name>`. Names must not contain `/`,
+  because the extension subscribes to one topic level only. They stay in the UI's Default
+  Room, which is the owner's choice.
+- To load a config change, restart a child bridge with its Restart button in the Homebridge UI.
+  Killing the child process makes Homebridge respawn it with the config already in memory, so
+  edits to `config.json` aren't loaded. `docker restart homebridge` works too, but drops every
+  bridge.
+- **Every new Homebridge accessory goes into its room in the Homebridge UI as part of adding it.**
+  The owner wants this from the start, not as a follow-up. That covers new plugins, devices,
+  re-runs of `pixi run homekit --apply`, and renamed accessories (a renamed accessory gets a new
+  ID). Once the accessory is up, take the room from the name prefix ("Office Reading" -> Office).
+  Ask if no UI room matches. Verify the per-room counts afterwards, and note any change in your
+  reply. HomeKit's own rooms are set in the Home app by the owner while pairing; nothing on the
+  Pi can set them.
+- The Homebridge UI's Accessories page has its own rooms, separate from HomeKit's, stored in
+  `/homebridge/accessories/uiAccessoriesLayout.json` (`{user: [{name, services: [...]}]}`).
+  New accessories show in "Default Room" until placed. Each entry's `uniqueId` is
+  `sha256(bridgeUsername + aid + iid + serviceTypeName)`, where the type name is e.g. `Switch`
+  or `Lightbulb`. The simplest way to get it is to run the UI's own client
+  (`homebridge-config-ui-x/node_modules/@homebridge/hap-client`, `getAllServices()`) inside the
+  container, which works because Homebridge runs with `-I`. Back up the file before editing it.
+- A per-room `television` accessory (scenes as inputs) was considered and rejected: HomeKit
+  shows one TV per bridge (8 pairings), Siri can't pick inputs, and wall-switch presses never
+  reach MQTT (automations run inside Z2M), so the shown scene would go stale. mqttthing's grouped
+  `custom` type is worse: tapping a grouped tile toggles every switch.
 
 ## Workflow rules
 

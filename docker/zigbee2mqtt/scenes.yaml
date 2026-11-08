@@ -1,0 +1,42 @@
+# House-wide scenes for the automations extension (external_extensions/automation.js).
+#
+# Each entry is a list of actions, run by an automation with `- scene: <name>`
+# or over MQTT by publishing `execute` to `zigbee2mqtt-scenes/<name>`. The Home
+# app buttons do the latter (see scenes/homekit.py). Keep names free of "/":
+# the extension only subscribes to a single topic level.
+#
+# The scene IDs are the per-room ones from scenes/*.yml (1 = Off).
+
+# Entrance wall switch, both top buttons
+Welcome home:
+  - entity: Entrance
+    payload: {"scene_recall": 3}  # Bright
+  - entity: Office
+    payload: {"scene_recall": 3}  # Reading
+  - entity: David
+    payload: {"scene_recall": 3}  # Reading
+  - entity: A2
+    payload: {"scene_recall": 3}  # Reading
+  - entity: Living room
+    payload: {"scene_recall": 3}  # Dinner
+  - entity: Kitchen
+    payload: {"scene_recall": 3}  # Night
+
+# Entrance wall switch, both bottom buttons
+Lights out:
+  - entity: Entrance
+    payload: {"scene_recall": 1}
+  - entity: Office
+    payload: {"scene_recall": 1}
+  - entity: David
+    payload: {"scene_recall": 1}
+  - entity: A2
+    payload: {"scene_recall": 1}
+  - entity: Living room
+    payload: {"scene_recall": 1}
+  - entity: Kitchen
+    payload: {"scene_recall": 1}
+  - entity: Balcony
+    payload: {"scene_recall": 1}
+  - entity: Shower room
+    payload: {"scene_recall": 1}

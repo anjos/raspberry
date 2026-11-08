@@ -11,6 +11,11 @@ The `external_extensions` directory is mounted at
 writable because Zigbee2MQTT creates temporary copies in this directory while
 validating extensions.
 
+`scenes.yaml` is mounted the same way and holds the house-wide scenes of the
+automations extension ("Welcome home", "Lights out"). Automations run them with
+`- scene: <name>`, and the Home app runs them by publishing `execute` to
+`zigbee2mqtt-scenes/<name>`.
+
 ## automation.js
 
 Upstream source:
